@@ -6,7 +6,7 @@ from typing import Any, Dict, Iterable, List, Optional, Sequence
 @dataclass
 class GenerationResult:
     text: str
-    meta: Dict[str, Any]
+    meta: Dict[str, Any] | None = None
 
 
 class BaseRunner(ABC):

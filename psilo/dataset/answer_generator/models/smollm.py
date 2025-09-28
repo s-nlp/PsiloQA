@@ -1,5 +1,5 @@
 from __future__ import annotations
-import torch
+from utils.constants import DEVICE
 
 from typing import Any, Dict, Sequence
 
@@ -29,7 +29,7 @@ class SmolLM(BaseRunner):
             return_tensors="pt",
             add_special_tokens=False,
         )
-        return enc  # has input_ids and attention_mask
+        return enc.to(DEVICE)  # has input_ids and attention_mask
 
 
     def answer_one(self, question: str) -> GenerationResult:
@@ -53,7 +53,7 @@ class SmolLM_135M(SmolLM):
             return
         name = "HuggingFaceTB/SmolLM2-135M-Instruct"
         self._tokenizer = AutoTokenizer.from_pretrained(name)
-        self._model = AutoModelForCausalLM.from_pretrained(name)
+        self._model = AutoModelForCausalLM.from_pretrained(name).to(DEVICE)
         self._model.eval()
 
 
@@ -67,7 +67,7 @@ class SmolLM_360M(SmolLM):
             return
         name = "HuggingFaceTB/SmolLM2-360M-Instruct"
         self._tokenizer = AutoTokenizer.from_pretrained(name)
-        self._model = AutoModelForCausalLM.from_pretrained(name, device_map="auto")
+        self._model = AutoModelForCausalLM.from_pretrained(name).to(DEVICE)
         self._model.eval()
 
 class SmolLM_1_7B(BaseRunner):
@@ -80,10 +80,10 @@ class SmolLM_1_7B(BaseRunner):
             return
         name = "HuggingFaceTB/SmolLM2-1.7B-Instruct"
         self._tokenizer = AutoTokenizer.from_pretrained(name)
-        self._model = AutoModelForCausalLM.from_pretrained(name, device_map="auto")
+        self._model = AutoModelForCausalLM.from_pretrained(name).to(DEVICE)
         self._model.eval()
 
 
 register(SmolLM_135M())
-# register(SmolLM_360M())
-# register(SmolLM_1_7B())
+register(SmolLM_360M())
+register(SmolLM_1_7B())
