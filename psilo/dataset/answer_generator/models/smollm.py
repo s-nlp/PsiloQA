@@ -29,8 +29,6 @@ class SmolLM(BaseRunner):
             return_tensors="pt",
             add_special_tokens=False,
         )
-        # move tensors to device
-        enc = {k: v.to(self._device) for k, v in enc.items()}
         return enc  # has input_ids and attention_mask
 
 
