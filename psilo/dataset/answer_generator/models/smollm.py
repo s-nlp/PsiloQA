@@ -1,5 +1,5 @@
-# psilo/hypotheses/models/bloom_zh.py
 from __future__ import annotations
+import torch
 
 from typing import Any, Dict, Sequence
 
@@ -27,7 +27,7 @@ class SmolLM_135M(BaseRunner):
             return
         name = "HuggingFaceTB/SmolLM2-135M-Instruct"
         self._tokenizer = AutoTokenizer.from_pretrained(name)
-        self._model = AutoModelForCausalLM.from_pretrained(name, device_map="auto")
+        self._model = AutoModelForCausalLM.from_pretrained(name)
         self._model.eval()
 
     def _format(self, q: str) -> Dict[str, Any]:

@@ -23,10 +23,10 @@ class BaseRunner(ABC):
 
     @abstractmethod
     def answer_one(
-        self, question: str, seed: Optional[int] = None
+        self, question: str
     ) -> GenerationResult: ...
 
     def answer_batch(
-        self, questions: Iterable[str], seed: Optional[int] = None
+        self, questions: Iterable[str]
     ) -> List[GenerationResult]:
-        return [self.answer_one(q, seed=seed) for q in questions]
+        return [self.answer_one(q) for q in questions]

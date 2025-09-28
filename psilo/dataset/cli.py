@@ -12,6 +12,7 @@ from loguru import logger
 from openai import AsyncOpenAI
 from tqdm import tqdm
 from utils.io import read_jsonl, read_text, write_jsonl
+from dataset.answer_generator import models  # noqa: F401
 
 app = typer.Typer(help="PsiloQA Generation Pipeline")
 
