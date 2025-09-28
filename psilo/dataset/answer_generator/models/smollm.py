@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import Any, Dict, Sequence
 
 from dataset.answer_generator.runner import BaseRunner, GenerationResult
@@ -52,7 +50,6 @@ class SmolLM_135M(SmolLM):
         name = "HuggingFaceTB/SmolLM2-135M-Instruct"
         self._tokenizer = AutoTokenizer.from_pretrained(name)
         self._model = AutoModelForCausalLM.from_pretrained(name).to(DEVICE)
-        self._model.eval()
 
 
 class SmolLM_360M(SmolLM):
@@ -66,7 +63,6 @@ class SmolLM_360M(SmolLM):
         name = "HuggingFaceTB/SmolLM2-360M-Instruct"
         self._tokenizer = AutoTokenizer.from_pretrained(name)
         self._model = AutoModelForCausalLM.from_pretrained(name).to(DEVICE)
-        self._model.eval()
 
 
 class SmolLM_1_7B(SmolLM):
@@ -80,7 +76,6 @@ class SmolLM_1_7B(SmolLM):
         name = "HuggingFaceTB/SmolLM2-1.7B-Instruct"
         self._tokenizer = AutoTokenizer.from_pretrained(name)
         self._model = AutoModelForCausalLM.from_pretrained(name).to(DEVICE)
-        self._model.eval()
 
 
 register(SmolLM_135M())

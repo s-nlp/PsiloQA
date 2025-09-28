@@ -1,6 +1,3 @@
-# psilo/hypotheses/models/bloom_zh.py
-from __future__ import annotations
-
 import random
 from typing import Any, Dict, Optional, Sequence
 
@@ -45,7 +42,6 @@ class BloomZhRunner(BaseRunner):
         name = "ikala/bloom-zh-3b-chat"
         self._tokenizer = AutoTokenizer.from_pretrained(name)
         self._model = AutoModelForCausalLM.from_pretrained(name).to(DEVICE)
-        self._model.eval()
 
     def _format(self, q: str) -> Dict[str, Any]:
         return self._tokenizer(f"<|prompter|>{q}</s><|assistant|>", return_tensors="pt").to(DEVICE)

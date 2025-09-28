@@ -16,9 +16,7 @@ def assign_runners_by_language(
     buckets: Dict[str, List[Tuple[int, Dict]]] = {}
     for i, s in enumerate(samples):
         lang = (s.get("language") or "").lower()
-        r = choose_runner_for_lang(
-            lang, seed=SEED + i
-        )  # SEED + i for assigning random model for each sample
+        r = choose_runner_for_lang(lang, seed=SEED + i)  # SEED + i for assigning random model for each sample
         if r is None:
             continue
         buckets.setdefault(r.runner_id, []).append((i, s))

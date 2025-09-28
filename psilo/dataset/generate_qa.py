@@ -12,9 +12,7 @@ from utils.constants import LONG_ANSWER_CONSTRAINT, SHORT_ANSWER_CONSTRAINT
 
 def build_content(prompt_template: str, passage: str) -> str:
     return prompt_template.format(
-        answer_length_constraint=SHORT_ANSWER_CONSTRAINT
-        if random.random() < 0.66
-        else LONG_ANSWER_CONSTRAINT,
+        answer_length_constraint=SHORT_ANSWER_CONSTRAINT if random.random() < 0.66 else LONG_ANSWER_CONSTRAINT,
         p=passage,
     )
 

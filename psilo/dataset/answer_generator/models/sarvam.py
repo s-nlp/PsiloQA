@@ -7,39 +7,39 @@ from utils.constants import DEVICE
 from ..registry import register
 
 
-class TinyLLaMARunner(BaseRunner):
+class SarvamRunner(BaseRunner):
     def __init__(self):
         self._tokenizer = None
         self._model = None
 
     @property
     def runner_id(self) -> str:
-        return "TinyLlama-TinyLlama-1.1B-Chat-v1.0"
+        return "sarvamai-sarvam-1"
 
     @property
     def languages(self) -> Sequence[str]:
-        return ["en"]
+        return ["hi"]
 
     def load(self) -> None:
         if self._model is not None:
             return
-        name = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+        name = "sarvamai/sarvam-1"
         self._tokenizer = AutoTokenizer.from_pretrained(name)
-        self._model = AutoModelForCausalLM.from_pretrained(name, device_map="auto")
+        self._model = AutoModelForCausalLM.from_pretrained(name).to(DEVICE)
 
     def _format(self, q: str) -> Dict[str, Any]:
         messages = [{"role": "user", "content": q}]
         chat_str = self._tokenizer.apply_chat_template(
             messages,
             tokenize=False,
-            add_generation_prompt=True,  # ensure assistant turn is open
+            add_generation_prompt=True,
         )
         enc = self._tokenizer(
             chat_str,
             return_tensors="pt",
             add_special_tokens=False,
         )
-        return enc.to(DEVICE)  # has input_ids and attention_mask
+        return enc.to(DEVICE)
 
     def answer_one(self, question: str) -> GenerationResult:
         assert self._model is not None and self._tokenizer is not None, "call load() first"
@@ -57,4 +57,4 @@ class TinyLLaMARunner(BaseRunner):
         return GenerationResult(text=text)
 
 
-register(TinyLLaMARunner())
+register(SarvamRunner())

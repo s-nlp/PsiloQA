@@ -13,12 +13,7 @@ from utils.constants import WIKI_API
 def get_random_titles(lang: str, n: int, user_agent: Optional[str] = None) -> List[str]:
     """Вернёт n случайных заголовков статей (namespace=0)."""
     s = requests.Session()
-    s.headers.update(
-        {
-            "User-Agent": user_agent
-            or "PsiloQA/0.1 (+https://example.org; contact: youremail@example.org)"
-        }
-    )
+    s.headers.update({"User-Agent": user_agent or "PsiloQA/0.1 (+https://example.org; contact: youremail@example.org)"})
     titles: List[str] = []
     while len(titles) < n:
         need = min(500, n - len(titles))
@@ -78,9 +73,7 @@ def get_random_pages(
     ua = user_agent or "PsiloQA/0.1 (+https://example.org; contact: youremail@example.org)"
     wiki = wikipediaapi.Wikipedia(user_agent=ua, language=lang)
 
-    iterator = (
-        tqdm(titles, desc=f"{lang}: fetching full pages", leave=False) if show_progress else titles
-    )
+    iterator = tqdm(titles, desc=f"{lang}: fetching full pages", leave=False) if show_progress else titles
     kept = 0
 
     for t in iterator:

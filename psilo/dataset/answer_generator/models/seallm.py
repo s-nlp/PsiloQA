@@ -7,39 +7,28 @@ from utils.constants import DEVICE
 from ..registry import register
 
 
-class TinyLLaMARunner(BaseRunner):
+class SeaLLMRunner(BaseRunner):
     def __init__(self):
         self._tokenizer = None
         self._model = None
 
     @property
     def runner_id(self) -> str:
-        return "TinyLlama-TinyLlama-1.1B-Chat-v1.0"
+        return "SeaLLMs-SeaLLM-7B-v2.5"
 
     @property
     def languages(self) -> Sequence[str]:
-        return ["en"]
+        return ["ar", "en", "vi", "id", "th", "ms", "km", "lo", "my", "tl"]
 
     def load(self) -> None:
         if self._model is not None:
             return
-        name = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+        name = "SeaLLMs/SeaLLM-7B-v2.5"
         self._tokenizer = AutoTokenizer.from_pretrained(name)
-        self._model = AutoModelForCausalLM.from_pretrained(name, device_map="auto")
+        self._model = AutoModelForCausalLM.from_pretrained(name).to(DEVICE)
 
     def _format(self, q: str) -> Dict[str, Any]:
-        messages = [{"role": "user", "content": q}]
-        chat_str = self._tokenizer.apply_chat_template(
-            messages,
-            tokenize=False,
-            add_generation_prompt=True,  # ensure assistant turn is open
-        )
-        enc = self._tokenizer(
-            chat_str,
-            return_tensors="pt",
-            add_special_tokens=False,
-        )
-        return enc.to(DEVICE)  # has input_ids and attention_mask
+        return self._tokenizer(q + "\n", return_tensors="pt").to(DEVICE)
 
     def answer_one(self, question: str) -> GenerationResult:
         assert self._model is not None and self._tokenizer is not None, "call load() first"
@@ -47,14 +36,13 @@ class TinyLLaMARunner(BaseRunner):
         output = self._model.generate(
             **input,
             max_new_tokens=512,
+            num_return_sequences=1,
+            no_repeat_ngram_size=2,
             do_sample=True,
-            temperature=0.7,
-            top_k=50,
-            top_p=0.95,
+            eos_token_id=self._tokenizer.encode("\n")[0],
+            pad_token_id=self._tokenizer.eos_token_id,
         )[0]
-        start = input["input_ids"].shape[-1]
-        text = self._tokenizer.decode(output[start:-1]).strip()
-        return GenerationResult(text=text)
+        return GenerationResult(text=self._tokenizer.decode(output[0][input["input_ids"].shape[-1] :], skip_special_tokens=True).strip())
 
 
-register(TinyLLaMARunner())
+register(SeaLLMRunner())

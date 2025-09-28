@@ -1,6 +1,3 @@
-# psilo/hypotheses/models/bloom_zh.py
-from __future__ import annotations
-
 from typing import Any, Dict, Sequence
 
 from dataset.answer_generator.runner import BaseRunner, GenerationResult
@@ -10,7 +7,7 @@ from utils.constants import DEVICE
 from ..registry import register
 
 
-class TinyLLaMARunner(BaseRunner):
+class Qwen2Runner(BaseRunner):
     def __init__(self):
         self._tokenizer = None
         self._model = None
@@ -21,7 +18,32 @@ class TinyLLaMARunner(BaseRunner):
 
     @property
     def languages(self) -> Sequence[str]:
-        return ["en"]
+        return [
+            "en",
+            "zh",
+            "ru",
+            "es",
+            "fr",
+            "de",
+            "ar",
+            "ko",
+            "ja",
+            "th",
+            "vi",
+            "pt",
+            "it",
+            "id",
+            "tr",
+            "he",
+            "gb",
+            "ca",
+            "cs",
+            "pl",
+            "fi",
+            "hu",
+            "pl",
+            "uk",
+        ]
 
     def load(self) -> None:
         if self._model is not None:
@@ -29,7 +51,6 @@ class TinyLLaMARunner(BaseRunner):
         name = "Qwen/Qwen2-7B-Instruct"
         self._tokenizer = AutoTokenizer.from_pretrained(name)
         self._model = AutoModelForCausalLM.from_pretrained(name).to(DEVICE)
-        self._model.eval()
 
     def _format(self, q: str) -> Dict[str, Any]:
         messages = [{"role": "user", "content": q}]
@@ -61,4 +82,4 @@ class TinyLLaMARunner(BaseRunner):
         return GenerationResult(text=text)
 
 
-register(TinyLLaMARunner())
+register(Qwen2Runner())

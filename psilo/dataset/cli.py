@@ -19,15 +19,11 @@ app = typer.Typer(help="PsiloQA Generation Pipeline")
 
 @app.command("get_contexts")
 def get_contexts(
-    languages: list[str] = typer.Option(
-        ["en"], "--language", "-l", help="ISO codes, e.g. en ru de"
-    ),
+    languages: list[str] = typer.Option(["en"], "--language", "-l", help="ISO codes, e.g. en ru de"),
     num_pages: int = typer.Option(100, "--num-pages", "-n", help="Pages per language"),
     min_string_length: int = typer.Option(100, "--min-len", help="Min length of page text"),
     seed: int = typer.Option(42, "--seed"),
-    output_path: Path = typer.Option(
-        "data/raw/output.jsonl", "--out", help="Path to store the contexts"
-    ),
+    output_path: Path = typer.Option("data/raw/output.jsonl", "--out", help="Path to store the contexts"),
 ):
     output_path.parent.mkdir(parents=True, exist_ok=True)
     total = 0
@@ -49,18 +45,14 @@ def generate_qa(
         "--in",
         help="Path to Wikipedia contexts JSONL (title, summary, language, url)",
     ),
-    output_path: Path = typer.Option(
-        Path("data/qa/output.jsonl"), "--out", help="Path to write QA JSONL"
-    ),
+    output_path: Path = typer.Option(Path("data/qa/output.jsonl"), "--out", help="Path to write QA JSONL"),
     prompt_file: Path = typer.Option(
         Path("psilo/prompts/wiki_qa.txt"),
         "--prompt-file",
         help="Path to the EXACT prompt template used in the notebook",
     ),
     openai_api_key: str | None = typer.Option(None, "--openai-api-key", envvar="OPENAI_API_KEY"),
-    model: str = typer.Option(
-        "gpt-4o-mini", "--model", help="OpenAI model id (e.g., o3-mini, gpt-4o-mini)"
-    ),
+    model: str = typer.Option("gpt-4o-mini", "--model", help="OpenAI model id (e.g., o3-mini, gpt-4o-mini)"),
     temperature: float = typer.Option(1.0, "--temperature"),
     seed: int | None = typer.Option(None, "--seed"),
 ):

@@ -1,6 +1,3 @@
-# psilo/hypotheses/models/bloom_zh.py
-from __future__ import annotations
-
 from typing import Any, Dict, Sequence
 
 from dataset.answer_generator.runner import BaseRunner, GenerationResult
@@ -29,7 +26,6 @@ class ZephyrRunner(BaseRunner):
         name = "HuggingFaceH4/zephyr-7b-beta"
         self._tokenizer = AutoTokenizer.from_pretrained(name)
         self._model = AutoModelForCausalLM.from_pretrained(name, device_map="auto")
-        self._model.eval()
 
     def _format(self, q: str) -> Dict[str, Any]:
         messages = [
