@@ -42,7 +42,7 @@ class SmolLM_135M(BaseRunner):
             "call load() first"
         )
         input = self._format(question)
-        output = self._model.generate(**input, max_new_tokens=512)[0]
+        output = self._model.generate(input, max_new_tokens=512)[0]
         start = input["input_ids"].shape[-1]
         text = self._tokenizer.decode(output[start:-1]).strip()
         return GenerationResult(text=text)
@@ -81,7 +81,7 @@ class SmolLM_360M(BaseRunner):
             "call load() first"
         )
         input = self._format(question)
-        output = self._model.generate(**input, max_new_tokens=512)[0]
+        output = self._model.generate(input, max_new_tokens=512)[0]
         start = input["input_ids"].shape[-1]
         text = self._tokenizer.decode(output[start:-1]).strip()
         return GenerationResult(text=text)
@@ -120,7 +120,7 @@ class SmolLM_1_7B(BaseRunner):
             "call load() first"
         )
         input = self._format(question)
-        output = self._model.generate(**input, max_new_tokens=512)[0]
+        output = self._model.generate(input, max_new_tokens=512)[0]
         start = input["input_ids"].shape[-1]
         text = self._tokenizer.decode(output[start:-1]).strip()
         return GenerationResult(text=text)
