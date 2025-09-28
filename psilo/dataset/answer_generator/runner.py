@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import Any, Dict, Iterable, List, Optional, Sequence
+from typing import Any, Dict, Iterable, List, Sequence
 
 
 @dataclass
@@ -22,11 +22,7 @@ class BaseRunner(ABC):
     def load(self) -> None: ...
 
     @abstractmethod
-    def answer_one(
-        self, question: str
-    ) -> GenerationResult: ...
+    def answer_one(self, question: str) -> GenerationResult: ...
 
-    def answer_batch(
-        self, questions: Iterable[str]
-    ) -> List[GenerationResult]:
+    def answer_batch(self, questions: Iterable[str]) -> List[GenerationResult]:
         return [self.answer_one(q) for q in questions]

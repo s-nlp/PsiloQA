@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 
 import typer
+from dataset.answer_generator import models  # noqa: F401
 from dataset.answer_generator.batching import assign_runners_by_language
 from dataset.answer_generator.registry import all_runners, sample_runner_for_language
 from dataset.generate_qa import generate_qa_for_summaries
@@ -12,7 +13,6 @@ from loguru import logger
 from openai import AsyncOpenAI
 from tqdm import tqdm
 from utils.io import read_jsonl, read_text, write_jsonl
-from dataset.answer_generator import models  # noqa: F401
 
 app = typer.Typer(help="PsiloQA Generation Pipeline")
 
@@ -23,9 +23,7 @@ def get_contexts(
         ["en"], "--language", "-l", help="ISO codes, e.g. en ru de"
     ),
     num_pages: int = typer.Option(100, "--num-pages", "-n", help="Pages per language"),
-    min_string_length: int = typer.Option(
-        100, "--min-len", help="Min length of page text"
-    ),
+    min_string_length: int = typer.Option(100, "--min-len", help="Min length of page text"),
     seed: int = typer.Option(42, "--seed"),
     output_path: Path = typer.Option(
         "data/raw/output.jsonl", "--out", help="Path to store the contexts"
@@ -59,16 +57,13 @@ def generate_qa(
         "--prompt-file",
         help="Path to the EXACT prompt template used in the notebook",
     ),
-    openai_api_key: str | None = typer.Option(
-        None, "--openai-api-key", envvar="OPENAI_API_KEY"
-    ),
+    openai_api_key: str | None = typer.Option(None, "--openai-api-key", envvar="OPENAI_API_KEY"),
     model: str = typer.Option(
         "gpt-4o-mini", "--model", help="OpenAI model id (e.g., o3-mini, gpt-4o-mini)"
     ),
     temperature: float = typer.Option(1.0, "--temperature"),
     seed: int | None = typer.Option(None, "--seed"),
 ):
-    output_path.parent.mkdir(parents=True, exist_ok=True)
     logger.info(f"Reading: {input_path}")
     rows = read_jsonl(str(input_path))
     logger.info(f"Rows: {len(rows)}")
@@ -103,7 +98,7 @@ def generate_llm_answers(
         "--in",
         help="Path to QA JSONL with at least {question, language}",
     ),
-    output_path: Path = typer.Option("data/interim/hypotheses.jsonl", "--out"),
+    output_path: Path = typer.Option("data/hypotheses/out.jsonl", "--out"),
     limit: int | None = typer.Option(None, "--limit", help="Process only N samples"),
     seed: int | None = typer.Option(42, "--seed"),
 ):

@@ -79,11 +79,7 @@ async def generate_qa_for_summaries(
         random.seed(seed)
 
     sem = asyncio.Semaphore(max_concurrency)
-    pbar = (
-        tqdm(total=len(rows), desc="QA generation...", leave=False)
-        if show_progress
-        else None
-    )
+    pbar = tqdm(total=len(rows), desc="QA generation...", leave=False) if show_progress else None
 
     async def process_one(idx: int, r: Dict) -> List[Dict]:
         passage = r.get("summary") or r.get("passage") or ""

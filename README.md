@@ -32,6 +32,12 @@ uv run psilo dataset generate_llm_answers
 
 Annotate hypotheses
 ```bash
+TBD
+```
+
+Filter data
+```bash
+TBD
 ```
 
 ## Model

@@ -6,6 +6,7 @@ from typing import Any, Dict, Optional, Sequence
 
 from dataset.answer_generator.runner import BaseRunner, GenerationResult
 from transformers import AutoModelForCausalLM, AutoTokenizer
+from utils.constants import DEVICE
 
 from ..registry import register
 
@@ -43,18 +44,14 @@ class BloomZhRunner(BaseRunner):
             return
         name = "ikala/bloom-zh-3b-chat"
         self._tokenizer = AutoTokenizer.from_pretrained(name)
-        self._model = AutoModelForCausalLM.from_pretrained(name, device_map="auto")
+        self._model = AutoModelForCausalLM.from_pretrained(name).to(DEVICE)
         self._model.eval()
 
     def _format(self, q: str) -> Dict[str, Any]:
-        return self._tokenizer(
-            f"<|prompter|>{q}</s><|assistant|>", return_tensors="pt"
-        ).to(self._model.device)
+        return self._tokenizer(f"<|prompter|>{q}</s><|assistant|>", return_tensors="pt").to(DEVICE)
 
     def answer_one(self, question: str, seed: Optional[int] = None) -> GenerationResult:
-        assert self._model is not None and self._tokenizer is not None, (
-            "call load() first"
-        )
+        assert self._model is not None and self._tokenizer is not None, "call load() first"
         rng = random.Random(seed)
         cfg_id, cfg = rng.choice(_CONFIGS)
 

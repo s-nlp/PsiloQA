@@ -5,6 +5,7 @@ from typing import Any, Dict, Sequence
 
 from dataset.answer_generator.runner import BaseRunner, GenerationResult
 from transformers import AutoModelForCausalLM, AutoTokenizer
+from utils.constants import DEVICE
 
 from ..registry import register
 
@@ -27,23 +28,25 @@ class TinyLLaMARunner(BaseRunner):
             return
         name = "Qwen/Qwen2-7B-Instruct"
         self._tokenizer = AutoTokenizer.from_pretrained(name)
-        self._model = AutoModelForCausalLM.from_pretrained(name, device_map="auto")
+        self._model = AutoModelForCausalLM.from_pretrained(name).to(DEVICE)
         self._model.eval()
 
     def _format(self, q: str) -> Dict[str, Any]:
-        messages = [
-            {"role": "system", "content": "Answer briefly on the question."},
-            {"role": "user", "content": q},
-        ]
-        text = self._tokenizer.apply_chat_template(
-            messages, tokenize=False, add_generation_prompt=True
+        messages = [{"role": "user", "content": q}]
+        chat_str = self._tokenizer.apply_chat_template(
+            messages,
+            tokenize=False,
+            add_generation_prompt=True,
         )
-        return self._tokenizer([text], return_tensors="pt").to(self._model.device)
+        enc = self._tokenizer(
+            chat_str,
+            return_tensors="pt",
+            add_special_tokens=False,
+        )
+        return enc.to(DEVICE)
 
     def answer_one(self, question: str) -> GenerationResult:
-        assert self._model is not None and self._tokenizer is not None, (
-            "call load() first"
-        )
+        assert self._model is not None and self._tokenizer is not None, "call load() first"
         input = self._format(question)
         output = self._model.generate(
             **input,

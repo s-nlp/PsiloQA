@@ -38,14 +38,9 @@ def get_random_titles(lang: str, n: int, user_agent: Optional[str] = None) -> Li
     return titles[:n]
 
 
-def get_wikipedia_intro(
-    page_name: str, lang: str, user_agent: Optional[str] = None
-) -> str:
+def get_wikipedia_intro(page_name: str, lang: str, user_agent: Optional[str] = None) -> str:
     formatted_page_name = page_name.replace(" ", "_")
-    ua = (
-        user_agent
-        or "PsiloQA/0.1 (+https://example.org; contact: youremail@example.org)"
-    )
+    ua = user_agent or "PsiloQA/0.1 (+https://example.org; contact: youremail@example.org)"
     wiki = wikipediaapi.Wikipedia(user_agent=ua, language=lang)
     page = wiki.page(formatted_page_name)
     if not page.exists():
@@ -80,16 +75,11 @@ def get_random_pages(
     titles = get_random_titles(lang, n, user_agent=user_agent)
     rows: List[Dict] = []
 
-    ua = (
-        user_agent
-        or "PsiloQA/0.1 (+https://example.org; contact: youremail@example.org)"
-    )
+    ua = user_agent or "PsiloQA/0.1 (+https://example.org; contact: youremail@example.org)"
     wiki = wikipediaapi.Wikipedia(user_agent=ua, language=lang)
 
     iterator = (
-        tqdm(titles, desc=f"{lang}: fetching full pages", leave=False)
-        if show_progress
-        else titles
+        tqdm(titles, desc=f"{lang}: fetching full pages", leave=False) if show_progress else titles
     )
     kept = 0
 

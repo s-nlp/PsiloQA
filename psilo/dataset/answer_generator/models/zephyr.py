@@ -5,6 +5,7 @@ from typing import Any, Dict, Sequence
 
 from dataset.answer_generator.runner import BaseRunner, GenerationResult
 from transformers import AutoModelForCausalLM, AutoTokenizer
+from utils.constants import DEVICE
 
 from ..registry import register
 
@@ -38,14 +39,20 @@ class ZephyrRunner(BaseRunner):
             },
             {"role": "user", "content": q},
         ]
-        return self._tokenizer.apply_chat_template(
-            messages, tokenize=True, add_generation_prompt=True
+        chat_str = self._tokenizer.apply_chat_template(
+            messages,
+            tokenize=False,
+            add_generation_prompt=True,  # ensure assistant turn is open
         )
+        enc = self._tokenizer(
+            chat_str,
+            return_tensors="pt",
+            add_special_tokens=False,
+        )
+        return enc.to(DEVICE)  # has input_ids and attention_mask
 
     def answer_one(self, question: str) -> GenerationResult:
-        assert self._model is not None and self._tokenizer is not None, (
-            "call load() first"
-        )
+        assert self._model is not None and self._tokenizer is not None, "call load() first"
         input = self._format(question)
         output = self._model.generate(
             **input,

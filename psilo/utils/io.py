@@ -14,6 +14,8 @@ def read_jsonl(path: str) -> List[Dict]:
 
 
 def write_jsonl(path: str, rows: Iterable[Dict], mode: str = "w") -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+
     with open(path, mode, encoding="utf-8") as f:
         for r in rows:
             f.write(json.dumps(r, ensure_ascii=False) + "\n")

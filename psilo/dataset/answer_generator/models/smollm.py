@@ -1,12 +1,13 @@
 from __future__ import annotations
-from utils.constants import DEVICE
 
 from typing import Any, Dict, Sequence
 
 from dataset.answer_generator.runner import BaseRunner, GenerationResult
 from transformers import AutoModelForCausalLM, AutoTokenizer
+from utils.constants import DEVICE
 
 from ..registry import register
+
 
 class SmolLM(BaseRunner):
     def __init__(self):
@@ -16,7 +17,7 @@ class SmolLM(BaseRunner):
     @property
     def languages(self) -> Sequence[str]:
         return ["en"]
-    
+
     def _format(self, q: str) -> Dict[str, Any]:
         messages = [{"role": "user", "content": q}]
         chat_str = self._tokenizer.apply_chat_template(
@@ -31,11 +32,8 @@ class SmolLM(BaseRunner):
         )
         return enc.to(DEVICE)  # has input_ids and attention_mask
 
-
     def answer_one(self, question: str) -> GenerationResult:
-        assert self._model is not None and self._tokenizer is not None, (
-            "call load() first"
-        )
+        assert self._model is not None and self._tokenizer is not None, "call load() first"
         input = self._format(question)
         output = self._model.generate(**input, max_new_tokens=512)[0]
         start = input["input_ids"].shape[-1]
@@ -69,6 +67,7 @@ class SmolLM_360M(SmolLM):
         self._tokenizer = AutoTokenizer.from_pretrained(name)
         self._model = AutoModelForCausalLM.from_pretrained(name).to(DEVICE)
         self._model.eval()
+
 
 class SmolLM_1_7B(SmolLM):
     @property
