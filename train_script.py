@@ -1,20 +1,19 @@
 import argparse
 import random
 
-from datasets import load_dataset
 import numpy as np
 import torch
+from datasets import load_dataset
+from lettucedetect.datasets.hallucination_dataset import (
+    HallucinationDataset,
+    HallucinationSample,
+)
+from lettucedetect.models.trainer import Trainer
 from torch.utils.data import DataLoader
 from transformers import (
     AutoModelForTokenClassification,
     AutoTokenizer,
     DataCollatorForTokenClassification,
-)
-
-from lettucedetect.models.trainer import Trainer
-from lettucedetect.datasets.hallucination_dataset import (
-    HallucinationDataset,
-    HallucinationSample,
 )
 
 
@@ -48,12 +47,13 @@ def parse_args():
     parser.add_argument(
         "--batch-size", type=int, default=4, help="Batch size for training and testing"
     )
-    parser.add_argument("--epochs", type=int, default=6, help="Number of training epochs")
+    parser.add_argument(
+        "--epochs", type=int, default=6, help="Number of training epochs"
+    )
     parser.add_argument(
         "--learning-rate", type=float, default=1e-5, help="Learning rate for training"
     )
     return parser.parse_args()
-
 
 
 def build_samples(ds_split, split_name: str) -> list[HallucinationSample]:
@@ -81,10 +81,12 @@ def main():
     set_seed(123)
 
     args = parse_args()
-    ds = load_dataset("s-nlp/PsiloQA") # token=
+    ds = load_dataset("s-nlp/PsiloQA")  # token=
 
     tokenizer = AutoTokenizer.from_pretrained(args.model_name)
-    data_collator = DataCollatorForTokenClassification(tokenizer=tokenizer, label_pad_token_id=-100)
+    data_collator = DataCollatorForTokenClassification(
+        tokenizer=tokenizer, label_pad_token_id=-100
+    )
 
     train_samples = build_samples(ds["train"], "train")
     dev_samples = build_samples(ds["validation"], "dev")

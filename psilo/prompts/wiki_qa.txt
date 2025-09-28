@@ -1,0 +1,21 @@
+Generate 3 question-answer pairs with different levels of complexity:
+Easy: Single‐fact recall (who, what, when)
+Medium: Requires combining two facts or understanding a sequence
+Hard: Involves inference over multiple sentences or less‐pronounced details
+
+If the passage lacks enough detail for a hard question, make the hardest possible within its scope.
+You must only create questions that require knowledge of the passage.
+Format your answer as a Python list with 3 jsons.
+Each json should contain "question", "answer" and "complexity" fields.
+
+Do not generate questions that require imagination.
+The questions should be factual, so do not generate questions that ask for subjective opinion or reasoning.
+It should be enough to know the facts from the provided passage.
+Each question must contain exactly one question.
+Do not make any reference to the passage in the question-answer pair.
+
+Use the language in which the passage is written.
+
+{answer_length_constraint}
+
+**Passage:** {p}

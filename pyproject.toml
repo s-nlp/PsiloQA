@@ -1,0 +1,35 @@
+[project]
+name = "psiloqa"
+version = "0.1.0"
+description = ""
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "accelerate>=1.10.1",
+    "datasets>=4.1.1",
+    "loguru>=0.7.3",
+    "openai>=1.109.1",
+    "torch==2.2.2",
+    "transformers>=4.56.2",
+    "typer>=0.19.2",
+    "wikipedia-api>=0.8.1",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.13.2",
+]
+
+[tool.ruff]
+target-version = "py310"          # or your real target
+line-length = 100
+extend-exclude = ["data/", ".venv/"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]    # errors, flakes, isort, pyupgrade
+ignore = []
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
