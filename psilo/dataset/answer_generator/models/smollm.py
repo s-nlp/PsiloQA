@@ -8,19 +8,47 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from ..registry import register
 
-
-class SmolLM_135M(BaseRunner):
+class SmolLM(BaseRunner):
     def __init__(self):
         self._tokenizer = None
         self._model = None
 
     @property
-    def runner_id(self) -> str:
-        return "HuggingFaceTB-SmolLM2-135M-Instruct"
-
-    @property
     def languages(self) -> Sequence[str]:
         return ["en"]
+    
+    def _format(self, q: str) -> Dict[str, Any]:
+        messages = [{"role": "user", "content": q}]
+        chat_str = self._tokenizer.apply_chat_template(
+            messages,
+            tokenize=False,
+            add_generation_prompt=True,  # ensure assistant turn is open
+        )
+        enc = self._tokenizer(
+            chat_str,
+            return_tensors="pt",
+            add_special_tokens=False,
+        )
+        # move tensors to device
+        enc = {k: v.to(self._device) for k, v in enc.items()}
+        return enc  # has input_ids and attention_mask
+
+
+    def answer_one(self, question: str) -> GenerationResult:
+        assert self._model is not None and self._tokenizer is not None, (
+            "call load() first"
+        )
+        input = self._format(question)
+        output = self._model.generate(input, max_new_tokens=512)[0]
+        start = input["input_ids"].shape[-1]
+        text = self._tokenizer.decode(output[start:-1]).strip()
+        return GenerationResult(text=text)
+
+
+class SmolLM_135M(SmolLM):
+    @property
+    def runner_id(self) -> str:
+        return "HuggingFaceTB-SmolLM2-135M-Instruct"
 
     def load(self) -> None:
         if self._model is not None:
@@ -30,36 +58,11 @@ class SmolLM_135M(BaseRunner):
         self._model = AutoModelForCausalLM.from_pretrained(name)
         self._model.eval()
 
-    def _format(self, q: str) -> Dict[str, Any]:
-        messages = [
-            {"role": "user", "content": q},
-        ]
 
-        return self._tokenizer.apply_chat_template(messages, tokenize=True)
-
-    def answer_one(self, question: str) -> GenerationResult:
-        assert self._model is not None and self._tokenizer is not None, (
-            "call load() first"
-        )
-        input = self._format(question)
-        output = self._model.generate(input, max_new_tokens=512)[0]
-        start = input["input_ids"].shape[-1]
-        text = self._tokenizer.decode(output[start:-1]).strip()
-        return GenerationResult(text=text)
-
-
-class SmolLM_360M(BaseRunner):
-    def __init__(self):
-        self._tokenizer = None
-        self._model = None
-
+class SmolLM_360M(SmolLM):
     @property
     def runner_id(self) -> str:
         return "HuggingFaceTB-SmolLM2-360M-Instruct"
-
-    @property
-    def languages(self) -> Sequence[str]:
-        return ["en"]
 
     def load(self) -> None:
         if self._model is not None:
@@ -69,36 +72,10 @@ class SmolLM_360M(BaseRunner):
         self._model = AutoModelForCausalLM.from_pretrained(name, device_map="auto")
         self._model.eval()
 
-    def _format(self, q: str) -> Dict[str, Any]:
-        messages = [
-            {"role": "user", "content": q},
-        ]
-
-        return self._tokenizer.apply_chat_template(messages, tokenize=True)
-
-    def answer_one(self, question: str) -> GenerationResult:
-        assert self._model is not None and self._tokenizer is not None, (
-            "call load() first"
-        )
-        input = self._format(question)
-        output = self._model.generate(input, max_new_tokens=512)[0]
-        start = input["input_ids"].shape[-1]
-        text = self._tokenizer.decode(output[start:-1]).strip()
-        return GenerationResult(text=text)
-
-
 class SmolLM_1_7B(BaseRunner):
-    def __init__(self):
-        self._tokenizer = None
-        self._model = None
-
     @property
     def runner_id(self) -> str:
         return "HuggingFaceTB-SmolLM2-1.7B-Instruct"
-
-    @property
-    def languages(self) -> Sequence[str]:
-        return ["en"]
 
     def load(self) -> None:
         if self._model is not None:
@@ -107,23 +84,6 @@ class SmolLM_1_7B(BaseRunner):
         self._tokenizer = AutoTokenizer.from_pretrained(name)
         self._model = AutoModelForCausalLM.from_pretrained(name, device_map="auto")
         self._model.eval()
-
-    def _format(self, q: str) -> Dict[str, Any]:
-        messages = [
-            {"role": "user", "content": q},
-        ]
-
-        return self._tokenizer.apply_chat_template(messages, tokenize=True)
-
-    def answer_one(self, question: str) -> GenerationResult:
-        assert self._model is not None and self._tokenizer is not None, (
-            "call load() first"
-        )
-        input = self._format(question)
-        output = self._model.generate(input, max_new_tokens=512)[0]
-        start = input["input_ids"].shape[-1]
-        text = self._tokenizer.decode(output[start:-1]).strip()
-        return GenerationResult(text=text)
 
 
 register(SmolLM_135M())
