@@ -26,7 +26,7 @@ def runners_for_language(lang: str) -> List[BaseRunner]:
 
 
 def sample_runner_for_language(
-    lang: str, seed: Optional[int] = None
+    lang: str, seed: Optional[int]
 ) -> Optional[BaseRunner]:
     eligible = runners_for_language(lang)
     if not eligible:

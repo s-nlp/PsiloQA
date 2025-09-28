@@ -136,7 +136,7 @@ def generate_llm_answers(
         questions = [s["question"] for _, s in batch]
         pbar = tqdm(total=len(batch), desc=f"{rid}", leave=False)
 
-        for (idx, sample), res in zip(batch, runner.answer_batch(questions, seed=seed)):
+        for (idx, sample), res in zip(batch, runner.answer_batch(questions)):
             out = {
                 "type": "hypothesis",
                 "language": sample.get("language"),
