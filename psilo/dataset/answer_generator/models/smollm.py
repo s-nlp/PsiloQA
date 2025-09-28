@@ -70,7 +70,7 @@ class SmolLM_360M(SmolLM):
         self._model = AutoModelForCausalLM.from_pretrained(name).to(DEVICE)
         self._model.eval()
 
-class SmolLM_1_7B(BaseRunner):
+class SmolLM_1_7B(SmolLM):
     @property
     def runner_id(self) -> str:
         return "HuggingFaceTB-SmolLM2-1.7B-Instruct"
