@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional, Sequence
+from typing import Any, Dict, Sequence
 
 from dataset.answer_generator.runner import BaseRunner, GenerationResult
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -33,7 +33,7 @@ class ProjectIndusRunner(BaseRunner):
         ]
         return self._tokenizer.apply_chat_template(messages, tokenize=True, add_generation_prompt=True, return_tensors="pt")
 
-    def answer_one(self, question: str, seed: Optional[int] = None) -> GenerationResult:
+    def answer_one(self, question: str) -> GenerationResult:
         inputs = self._format(question)
         output = self._model.generate(
             inputs,

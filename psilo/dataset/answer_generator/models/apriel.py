@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional, Sequence
+from typing import Any, Dict, Sequence
 
 from dataset.answer_generator.runner import BaseRunner, GenerationResult
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -33,7 +33,7 @@ class AprielRunner(BaseRunner):
         input_text = self._tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
         return self._tokenizer(input_text, return_tensors="pt", return_token_type_ids=False).to(DEVICE)
 
-    def answer_one(self, question: str, seed: Optional[int] = None) -> GenerationResult:
+    def answer_one(self, question: str) -> GenerationResult:
         inputs = self._format(question)
         outputs = self._model.generate(**inputs, max_new_tokens=512, temperature=0.2, top_p=0.9, do_sample=True)
         response = self._tokenizer.decode(outputs[0][inputs.shape[0] :], skip_special_tokens=True)

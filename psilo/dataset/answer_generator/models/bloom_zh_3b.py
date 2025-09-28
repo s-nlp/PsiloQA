@@ -1,5 +1,5 @@
 import random
-from typing import Any, Dict, Optional, Sequence
+from typing import Any, Dict, Sequence
 
 from dataset.answer_generator.runner import BaseRunner, GenerationResult
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -46,7 +46,7 @@ class BloomZhRunner(BaseRunner):
     def _format(self, q: str) -> Dict[str, Any]:
         return self._tokenizer(f"<|prompter|>{q}</s><|assistant|>", return_tensors="pt").to(DEVICE)
 
-    def answer_one(self, question: str, seed: Optional[int] = None) -> GenerationResult:
+    def answer_one(self, question: str) -> GenerationResult:
         assert self._model is not None and self._tokenizer is not None, "call load() first"
         rng = random.Random(seed)
         cfg_id, cfg = rng.choice(_CONFIGS)

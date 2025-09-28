@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional, Sequence
+from typing import Any, Dict, Sequence
 
 from dataset.answer_generator.runner import BaseRunner, GenerationResult
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -31,7 +31,7 @@ class BloomDeRunner(BaseRunner):
         prompt = q + "\n"
         return self._tokenizer(prompt, return_tensors="pt").to(DEVICE)
 
-    def answer_one(self, question: str, seed: Optional[int] = None) -> GenerationResult:
+    def answer_one(self, question: str) -> GenerationResult:
         inputs = self._format(question)
         outputs = self._model.generate(
             **inputs,

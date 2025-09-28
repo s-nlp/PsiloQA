@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional, Sequence
+from typing import Any, Dict, Sequence
 
 from dataset.answer_generator.runner import BaseRunner, GenerationResult
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -30,7 +30,7 @@ class PythiaRunner(BaseRunner):
     def _format(self, q: str) -> Dict[str, Any]:
         return self._model(f"<human>: {q}\n<bot>:", return_tensors="pt").to(DEVICE)
 
-    def answer_one(self, question: str, seed: Optional[int] = None) -> GenerationResult:
+    def answer_one(self, question: str) -> GenerationResult:
         inputs = self._format(question)
         outputs = self._model.generate(**inputs, max_new_tokens=128, do_sample=False, temperature=1.0, eos_token_id=[self._model.encode("<")[0]])
         output_str = self._model.decode(outputs[0][inputs.input_ids.shape[-1] :])[:-1].strip()

@@ -1,6 +1,25 @@
 from . import (
+    apriel,  # noqa: F401
+    bloom_de,  # noqa: F401
     bloom_zh_3b,  # noqa: F401
+    croissant,  # noqa: F401
+    eurollm,  # noqa: F401
+    falcon,  # noqa: F401
+    gemma,  # noqa: F401
+    llama_finnish,  # noqa: F401
+    mistral,  # noqa: F401
+    mistral_hermes,  # noqa: F401
+    modello,  # noqa: F401
+    neurona,  # noqa: F401
+    occiglot,  # noqa: F401
+    phi_mini,  # noqa: F401
+    projectindus,  # noqa: F401
+    pythia,  # noqa: F401
     qwen2_7b,  # noqa: F401
+    qwen_2_5_3b,  # noqa: F401
+    salamandra,  # noqa: F401
+    sarvam,  # noqa: F401
+    seallm,  # noqa: F401
     smollm,  # noqa: F401
     tiny_llama,  # noqa: F401
     zephyr,  # noqa: F401
