@@ -1,4 +1,4 @@
-from typing import Any, Dict, Sequence
+from typing import Any, Sequence
 
 from dataset.answer_generator.runner import BaseRunner, GenerationResult
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -27,7 +27,7 @@ class NeuronaRunner(BaseRunner):
         self._tokenizer = AutoTokenizer.from_pretrained(name)
         self._model = AutoModelForCausalLM.from_pretrained(name).to(DEVICE)
 
-    def _format(self, q: str) -> Dict[str, Any]:
+    def _format(self, q: str) -> dict[str, Any]:
         message = [{"role": "user", "content": q}]
 
         return self._tokenizer.apply_chat_template(message, add_generation_prompt=True, return_tensors="pt").to(DEVICE)

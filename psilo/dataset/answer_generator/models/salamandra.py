@@ -1,4 +1,4 @@
-from typing import Any, Dict, Sequence
+from typing import Any, Sequence
 
 from dataset.answer_generator.runner import BaseRunner, GenerationResult
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -27,14 +27,14 @@ class SalamandraRunner(BaseRunner):
         self._tokenizer = AutoTokenizer.from_pretrained(name)
         self._model = AutoModelForCausalLM.from_pretrained(name).to(DEVICE)
 
-    def _format(self, q: str) -> Dict[str, Any]:
+    def _format(self, q: str) -> dict[str, Any]:
         return self._tokenizer(f"Kysymys: {q}\nVastaa:", return_tensors="pt").to(DEVICE)
 
     def answer_one(self, question: str) -> GenerationResult:
-        input = self._format(question)
-        output = self._model.generate(**input, max_new_tokens=512)[0]
-        generated_ids = [output[len(input_ids) :] for input_ids, output_ids in zip(input.input_ids, generated_ids)]
-        return GenerationResult(text=self._tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0].strip())
+        inputs = self._format(question)
+        outputs = self._model.generate(**inputs, max_new_tokens=128, do_sample=False, temperature=1.0, eos_token_id=[self._model.encode("<")[0]])
+        output_str = self._model.decode(outputs[0][inputs.input_ids.shape[-1] :])[:-1].strip()
+        return GenerationResult(text=output_str)
 
 
 register(SalamandraRunner())

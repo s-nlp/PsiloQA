@@ -1,4 +1,5 @@
-from typing import Any, Dict, Sequence
+import os
+from typing import Any, Sequence
 
 from dataset.answer_generator.runner import BaseRunner, GenerationResult
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -27,7 +28,7 @@ class MistralHermesRunner(BaseRunner):
         self._tokenizer = AutoTokenizer.from_pretrained(name, token=os.getenv("HF_TOKEN"))
         self._model = AutoModelForCausalLM.from_pretrained(name, token=os.getenv("HF_TOKEN")).to(DEVICE)
 
-    def _format(self, q: str) -> Dict[str, Any]:
+    def _format(self, q: str) -> dict[str, Any]:
         prompt = """<|im_start|>systemYou are a sentient, superintelligent artificial general intelligence, here to teach and assist me.<|im_end|><|im_start|>user{q}<|im_start|>assistant\n"""
         return self._tokenizer(prompt.format(q=q), return_tensors="pt").input_ids.to("cuda")
 

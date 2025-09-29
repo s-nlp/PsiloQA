@@ -1,10 +1,10 @@
 import json
-from typing import Dict, Iterable, List, Optional
+from typing import Iterable
 
 
-def read_jsonl(path: str) -> List[Dict]:
-    rows: List[Dict] = []
-    with open(path, "r", encoding="utf-8") as f:
+def read_jsonl(path: str) -> list[dict]:
+    rows: list[dict] = []
+    with open(path, encoding="utf-8") as f:
         for line in f:
             line = line.strip()
             if not line:
@@ -13,7 +13,7 @@ def read_jsonl(path: str) -> List[Dict]:
     return rows
 
 
-def write_jsonl(path: str, rows: Iterable[Dict], mode: str = "w") -> None:
+def write_jsonl(path: str, rows: Iterable[dict], mode: str = "w") -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
 
     with open(path, mode, encoding="utf-8") as f:
@@ -21,8 +21,8 @@ def write_jsonl(path: str, rows: Iterable[Dict], mode: str = "w") -> None:
             f.write(json.dumps(r, ensure_ascii=False) + "\n")
 
 
-def read_text(path: Optional[str]) -> Optional[str]:
+def read_text(path: str | None) -> str | None:
     if not path:
         return None
-    with open(path, "r", encoding="utf-8") as f:
+    with open(path, encoding="utf-8") as f:
         return f.read()

@@ -1,6 +1,5 @@
 # psilo/dataset/wiki.py
 import time
-from typing import Dict, List, Optional
 from urllib.parse import quote
 
 import requests
@@ -10,11 +9,11 @@ from tqdm.auto import tqdm
 from utils.constants import WIKI_API
 
 
-def get_random_titles(lang: str, n: int, user_agent: Optional[str] = None) -> List[str]:
+def get_random_titles(lang: str, n: int, user_agent: str | None = None) -> list[str]:
     """Вернёт n случайных заголовков статей (namespace=0)."""
     s = requests.Session()
     s.headers.update({"User-Agent": user_agent or "PsiloQA/0.1 (+https://example.org; contact: youremail@example.org)"})
-    titles: List[str] = []
+    titles: list[str] = []
     while len(titles) < n:
         need = min(500, n - len(titles))
         r = s.get(
@@ -33,7 +32,7 @@ def get_random_titles(lang: str, n: int, user_agent: Optional[str] = None) -> Li
     return titles[:n]
 
 
-def get_wikipedia_intro(page_name: str, lang: str, user_agent: Optional[str] = None) -> str:
+def get_wikipedia_intro(page_name: str, lang: str, user_agent: str | None = None) -> str:
     formatted_page_name = page_name.replace(" ", "_")
     ua = user_agent or "PsiloQA/0.1 (+https://example.org; contact: youremail@example.org)"
     wiki = wikipediaapi.Wikipedia(user_agent=ua, language=lang)
@@ -52,10 +51,10 @@ def get_random_pages(
     lang: str,
     n: int,
     min_len: int = 0,
-    user_agent: Optional[str] = None,
+    user_agent: str | None = None,
     show_progress: bool = True,
     per_request_sleep: float = 0.0,
-) -> List[Dict]:
+) -> list[dict]:
     """
     Fetches full Wikipedia page texts.
 
@@ -68,7 +67,7 @@ def get_random_pages(
     }
     """
     titles = get_random_titles(lang, n, user_agent=user_agent)
-    rows: List[Dict] = []
+    rows: list[dict] = []
 
     ua = user_agent or "PsiloQA/0.1 (+https://example.org; contact: youremail@example.org)"
     wiki = wikipediaapi.Wikipedia(user_agent=ua, language=lang)

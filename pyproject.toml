@@ -8,6 +8,7 @@ dependencies = [
     "accelerate>=1.10.1",
     "datasets>=4.1.1",
     "loguru>=0.7.3",
+    "numpy<2",
     "openai>=1.109.1",
     "torch==2.2.2",
     "transformers>=4.56.2",
@@ -28,7 +29,7 @@ extend-exclude = ["data/", ".venv/"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP"]    # errors, flakes, isort, pyupgrade
-ignore = []
+ignore = ["UP035"]
 
 [tool.ruff.format]
 quote-style = "double"

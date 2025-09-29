@@ -1,4 +1,4 @@
-from typing import Any, Dict, Sequence
+from typing import Any, Sequence
 
 from dataset.answer_generator.runner import BaseRunner, GenerationResult
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -29,7 +29,7 @@ class FalconRunner(BaseRunner):
         )
         self._model = AutoModelForCausalLM.from_pretrained(name).to(DEVICE)
 
-    def _format(self, q: str) -> Dict[str, Any]:
+    def _format(self, q: str) -> dict[str, Any]:
         prompt = f"Question: {q}\nAnswer: "
         return self._tokenizer(prompt, return_tensors="pt")
 

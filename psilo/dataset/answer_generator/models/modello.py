@@ -1,4 +1,5 @@
-from typing import Any, Dict, Sequence
+import os
+from typing import Any, Sequence
 
 from dataset.answer_generator.runner import BaseRunner, GenerationResult
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -27,7 +28,7 @@ class ModelloRunner(BaseRunner):
         self._tokenizer = AutoTokenizer.from_pretrained(name, token=os.getenv("HF_TOKEN"))
         self._model = AutoModelForCausalLM.from_pretrained(name, token=os.getenv("HF_TOKEN")).to(DEVICE)
 
-    def _format(self, q: str) -> Dict[str, Any]:
+    def _format(self, q: str) -> dict[str, Any]:
         message = [{"role": "user", "content": q}]
         prompt = self._tokenizer.apply_chat_template(message, add_generation_prompt=True, tokenize=False)
         return self._tokenizer.encode(prompt, return_tensors="pt").to(DEVICE)
@@ -43,7 +44,6 @@ class ModelloRunner(BaseRunner):
             pad_token_id=self._tokenizer.eos_token_id,
         )
         response_token_ids = output[0].tolist()[len(inputs[0]) :]
-        response_tokens = self._tokenizer.convert_ids_to_tokens(response_token_ids)
         return GenerationResult(text=self._tokenizer.decode(response_token_ids, skip_special_tokens=True))
 
 
