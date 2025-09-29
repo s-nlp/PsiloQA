@@ -1,40 +1,26 @@
-from typing import Any, Sequence
+from typing import Sequence
 
-from dataset.answer_generator.runner import BaseRunner, GenerationResult
-from transformers import AutoModelForCausalLM, AutoTokenizer
-from utils.constants import DEVICE
+from dataset.answer_generator.runner import RunnerWithCustomTemplate
 
 from ..registry import register
 
 
-class PythiaRunner(BaseRunner):
-    def __init__(self):
-        self._tokenizer = None
-        self._model = None
-
+class PythiaRunner(RunnerWithCustomTemplate):
     @property
     def runner_id(self) -> str:
-        return "togethercomputer-Pythia-Chat-Base-7B-v0.16"
+        return "togethercomputer/Pythia-Chat-Base-7B-v0.16"
 
     @property
     def languages(self) -> Sequence[str]:
         return ["en"]
 
-    def load(self) -> None:
-        if self._model is not None:
-            return
-        name = "togethercomputer/Pythia-Chat-Base-7B-v0.16"
-        self._tokenizer = AutoTokenizer.from_pretrained(name)
-        self._model = AutoModelForCausalLM.from_pretrained(name).to(DEVICE)
+    @property
+    def template(self) -> str:
+        return "<human>: {}\n<bot>:"
 
-    def _format(self, q: str) -> dict[str, Any]:
-        return self._model(f"<human>: {q}\n<bot>:", return_tensors="pt").to(DEVICE)
-
-    def answer_one(self, question: str) -> GenerationResult:
-        inputs = self._format(question)
-        outputs = self._model.generate(**inputs, max_new_tokens=128, do_sample=False, temperature=1.0, eos_token_id=[self._model.encode("<")[0]])
-        output_str = self._model.decode(outputs[0][inputs.input_ids.shape[-1] :])[:-1].strip()
-        return GenerationResult(text=output_str)
+    @property
+    def generation_params(self) -> dict:
+        return {"max_new_tokens": 512, "do_sample": False, "eos_token_id": [self._model.encode("<")[0]], "temperature": 1.0}
 
 
 register(PythiaRunner())
