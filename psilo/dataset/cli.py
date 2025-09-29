@@ -120,7 +120,7 @@ def generate_hypotheses(
             pbar.close()
 
         logger.info(f"Writing {len(outputs)} rows → {output_path}")
-        write_jsonl(output_path, outputs, mode="append")
+        write_jsonl(output_path, outputs, mode="a")
 
         runner.destroy()
 
