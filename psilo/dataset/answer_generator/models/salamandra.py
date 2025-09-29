@@ -20,7 +20,7 @@ class SalamandraRunner(RunnerWithCustomTemplate):
         return {"max_new_tokens": 512, "do_sample": False, "temperature": 1.0, "eos_token_id": [self._tokenizer.encode("<")[0]]}
 
     @property
-    def template(self) -> str:
+    def prompt_template(self) -> str:
         return "Kysymys: {}\nVastaa:"
 
     def _format(self, q: str) -> dict[str, Any]:

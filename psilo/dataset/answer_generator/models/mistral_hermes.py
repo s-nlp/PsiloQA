@@ -15,7 +15,7 @@ class MistralHermesRunner(RunnerWithCustomTemplate):
         return ["en"]
 
     @property
-    def template(self) -> str:
+    def prompt_template(self) -> str:
         return """<|im_start|>systemYou are a sentient, superintelligent artificial general intelligence, here to teach and assist me.<|im_end|><|im_start|>user{}<|im_start|>assistant\n"""
 
     @property

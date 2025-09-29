@@ -15,7 +15,7 @@ class LlamaFinnishRunner(RunnerWithCustomTemplate):
         return ["fi"]
 
     @property
-    def template(self) -> str:
+    def prompt_template(self) -> str:
         return """<|alku|> Olet tekoälyavustaja. Seuraavaksi saat kysymyksen tai tehtävän. Kirjoita vastaus parhaasi mukaan siten että se täyttää kysymyksen tai tehtävän vaatimukset.\n<|ihminen|> Kysymys/Tehtävä:\n{}\n<|avustaja|> Vastauksesi:\n"""
 
     @property

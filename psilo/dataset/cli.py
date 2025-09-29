@@ -76,6 +76,7 @@ def generate_hypotheses(
     from dataset.answer_generator import models  # noqa: F401
     from dataset.answer_generator.batching import assign_runners_by_language
     from dataset.answer_generator.registry import all_runners, sample_runner_for_language
+    from dataset.answer_generator.runner import RunnerType
 
     rows = read_jsonl(str(input_path))
     if limit:
@@ -95,25 +96,34 @@ def generate_hypotheses(
         langs = {(s.get("language") or "").lower() for _, s in batch}
         logger.info(f"  {rid}: {len(batch)} samples, langs={sorted(langs)}")
 
-    outputs: list[dict] = []
-
     for rid, batch in buckets.items():
+        outputs: list[dict] = []
+
         runner = all_runners()[rid]
         logger.info(f"Loading runner: {rid}")
         runner.load()
 
-        pbar = tqdm(total=len(batch), desc=f"{rid}", leave=False)
+        if runner.TYPE == RunnerType.VLLM:
+            questions = [s["question"] for _, s in batch]
+            pbar = tqdm(total=len(questions), desc=f"{rid}", leave=False)
+            results = runner.answer_batch(questions)
+            for (_, sample), res in zip(batch, results):
+                outputs.append(sample | {"model_id": rid, "hypothesis": res.text, "gen_meta": res.meta})
+                pbar.update(1)
+            pbar.close()
+        else:
+            pbar = tqdm(total=len(batch), desc=f"{rid}", leave=False)
+            for _, sample in batch:
+                res = runner.answer_one(sample["question"])
+                outputs.append(sample | {"model_id": rid, "hypothesis": res.text, "gen_meta": res.meta})
+                pbar.update(1)
+            pbar.close()
 
-        for _, sample in batch:
-            runner_result = runner.answer_one(sample["question"])
-            outputs.append(sample | {"model_id": rid, "hypothesis": runner_result.text, "gen_meta": runner_result.meta})
-            pbar.update(1)
-        pbar.close()
+        logger.info(f"Writing {len(outputs)} rows → {output_path}")
+        write_jsonl(output_path, outputs, mode="append")
 
         runner.destroy()
 
-    logger.info(f"Writing {len(outputs)} rows → {output_path}")
-    write_jsonl(output_path, outputs)
     logger.success("Done.")
 
 

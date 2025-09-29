@@ -15,7 +15,7 @@ class PythiaRunner(RunnerWithCustomTemplate):
         return ["en"]
 
     @property
-    def template(self) -> str:
+    def prompt_template(self) -> str:
         return "<human>: {}\n<bot>:"
 
     @property
