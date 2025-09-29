@@ -7,7 +7,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class HFSettings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=".env",
-        env_prefix="HF_SETTINGS_",
+        env_prefix="HF_",
         extra="ignore",
     )
 
