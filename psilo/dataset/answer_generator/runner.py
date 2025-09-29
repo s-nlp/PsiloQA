@@ -168,7 +168,7 @@ class RunnerWithCustomTemplate(BaseRunner):
 
     def _format(self, user_prompt: str):
         prompt = self.prompt_template.format(user_prompt)
-        return self._tokenizer(prompt, return_tensors="pt")
+        return self._tokenizer(prompt, return_tensors="pt").to(DEVICE)
 
     def answer_one(self, question: str) -> GenerationResult:
         input = self._format(question)
