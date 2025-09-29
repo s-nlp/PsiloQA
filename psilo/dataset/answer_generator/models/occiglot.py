@@ -1,11 +1,11 @@
 from typing import Sequence
 
-from dataset.answer_generator.runner import BaseRunner
+from dataset.answer_generator.runner import RunnerWithChatTemplate
 
 from ..registry import register
 
 
-class OcciglotRunner(BaseRunner):
+class OcciglotRunner(RunnerWithChatTemplate):
     @property
     def runner_id(self) -> str:
         return "ciglot/occiglot-7b-es-en-instruct"

@@ -11,7 +11,7 @@ from dataset.wiki_contexts import get_random_pages
 from loguru import logger
 from openai import AsyncOpenAI
 from tqdm import tqdm
-from utils.constants import AVAILABLE_LANGUAGES
+from utils.constants import DEFAULT_LANGUAGES
 from utils.io import read_jsonl, write_jsonl
 
 app = typer.Typer(help="PsiloQA Generation Pipeline")
@@ -19,7 +19,7 @@ app = typer.Typer(help="PsiloQA Generation Pipeline")
 
 @app.command("get_contexts")
 def get_contexts(
-    languages: list[str] = typer.Option(AVAILABLE_LANGUAGES, "--language", "-l", help="ISO codes, e.g. en ru de"),
+    languages: list[str] = typer.Option(DEFAULT_LANGUAGES, "--language", "-l", help="ISO codes, e.g. en ru de"),
     num_pages: int = typer.Option(100, "--num-pages", "-n", help="Pages per language"),
     min_string_length: int = typer.Option(100, "--min-len", help="Min length of page text"),
     output_path: Path = typer.Option("data/raw/output.jsonl", "--out", help="Path to store the contexts"),
