@@ -6,10 +6,6 @@ from ..registry import register
 
 
 class PhiMiniInstructRunner(RunnerWithChatTemplate):
-    def __init__(self):
-        self._tokenizer = None
-        self._model = None
-
     @property
     def runner_id(self) -> str:
         return "microsoft/Phi-4-mini-instruct"

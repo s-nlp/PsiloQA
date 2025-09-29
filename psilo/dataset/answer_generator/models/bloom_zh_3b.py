@@ -7,10 +7,6 @@ from ..registry import register
 
 
 class BloomZhRunner(BaseRunner):
-    def __init__(self):
-        self._tokenizer = None
-        self._model = None
-
     @property
     def runner_id(self) -> str:
         return "ikala/bloom-zh-3b-chat"

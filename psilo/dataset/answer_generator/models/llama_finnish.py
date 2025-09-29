@@ -9,10 +9,6 @@ from ..registry import register
 
 
 class LlamaFinnishRunner(RunnerWithCustomTemplate):
-    def __init__(self):
-        self._tokenizer = None
-        self._model = None
-
     @property
     def runner_id(self) -> str:
         return "Finnish-NLP/llama-7b-finnish-instruct-v0.2"

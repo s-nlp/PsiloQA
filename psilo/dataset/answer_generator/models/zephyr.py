@@ -6,10 +6,6 @@ from ..registry import register
 
 
 class ZephyrRunner(RunnerWithChatTemplate):
-    def __init__(self):
-        self._tokenizer = None
-        self._model = None
-
     @property
     def runner_id(self) -> str:
         return "HuggingFaceH4/zephyr-7b-beta"

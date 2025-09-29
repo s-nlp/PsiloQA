@@ -9,10 +9,6 @@ from ..registry import register
 
 
 class MistralHermesRunner(RunnerWithCustomTemplate):
-    def __init__(self):
-        self._tokenizer = None
-        self._model = None
-
     @property
     def runner_id(self) -> str:
         return "NousResearch/Nous-Hermes-2-Mistral-7B-DPO"

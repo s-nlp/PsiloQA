@@ -6,10 +6,6 @@ from ..registry import register
 
 
 class OcciglotRunner(BaseRunner):
-    def __init__(self):
-        self._tokenizer = None
-        self._model = None
-
     @property
     def runner_id(self) -> str:
         return "ciglot/occiglot-7b-es-en-instruct"

@@ -9,10 +9,6 @@ from ..registry import register
 
 
 class ModelloRunner(RunnerWithChatTemplate):
-    def __init__(self):
-        self._tokenizer = None
-        self._model = None
-
     @property
     def runner_id(self) -> str:
         return "sapienzanlp/modello-italia-9b"

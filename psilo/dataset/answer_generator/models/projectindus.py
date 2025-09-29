@@ -6,10 +6,6 @@ from ..registry import register
 
 
 class ProjectIndusRunner(RunnerWithChatTemplate):
-    def __init__(self):
-        self._tokenizer = None
-        self._model = None
-
     @property
     def runner_id(self) -> str:
         return "togethercomputer/Pythia-Chat-Base-7B-v0.16"

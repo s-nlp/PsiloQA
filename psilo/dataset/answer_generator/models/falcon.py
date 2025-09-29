@@ -6,10 +6,6 @@ from ..registry import register
 
 
 class FalconRunner(RunnerWithCustomTemplate):
-    def __init__(self):
-        self._tokenizer = None
-        self._model = None
-
     @property
     def runner_id(self) -> str:
         return "tiiuae/falcon-7b-instruct"
