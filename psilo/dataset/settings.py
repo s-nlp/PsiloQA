@@ -19,7 +19,7 @@ class QAGeneratorOpenAISettings(OpenAISettings):
         env_prefix="QA_GENERATOR_",
         extra="ignore",
     )
-    system_prompt_path: Path = Field(default=Path("psilo/prompts/qa_generator_system_prompt.txt"))
+    system_prompt_path: Path = Field(default=Path("psilo/dataset/prompts/qa_generator_system_prompt.txt"))
 
 
 class AnnotatorOpenAISettings(OpenAISettings):
@@ -28,5 +28,5 @@ class AnnotatorOpenAISettings(OpenAISettings):
         env_prefix="ANNOTATOR_",
         extra="ignore",
     )
-    system_prompt_path: Path = Field(default=Path("psilo/prompts/annotator_system_prompt.txt"))
-    template_path: Path = Field(default=Path("psilo/prompts/annotator_template.txt"))
+    system_prompt_path: Path = Field(default=Path("psilo/dataset/prompts/annotator_system_prompt.txt"))
+    template_path: Path = Field(default=Path("psilo/dataset/prompts/annotator_template.txt"))

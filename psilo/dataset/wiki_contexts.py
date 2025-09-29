@@ -38,12 +38,11 @@ def get_wikipedia_intro(page_name: str, lang: str, user_agent: str | None = None
     wiki = wikipediaapi.Wikipedia(user_agent=ua, language=lang)
     page = wiki.page(formatted_page_name)
     if not page.exists():
-        return ""  # или можно raise Exception
+        return ""
     return page.summary
 
 
 def _wiki_url(lang: str, title: str) -> str:
-    # Каноничный путь вида /wiki/Title_with_Underscores
     return f"https://{lang}.wikipedia.org/wiki/{quote(title.replace(' ', '_'))}"
 
 
