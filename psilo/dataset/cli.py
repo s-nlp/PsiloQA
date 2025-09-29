@@ -5,12 +5,13 @@ from pathlib import Path
 
 import typer
 from dataset.annotator import annotate_hypotheses
-from dataset.generate_qa import generate_qa_for_summaries
+from dataset.generate_qa import generate_qa_for_contexts
+from dataset.settings import AnnotatorOpenAISettings, QAGeneratorOpenAISettings
 from dataset.wiki_contexts import get_random_pages
 from loguru import logger
 from openai import AsyncOpenAI
 from tqdm import tqdm
-from utils.io import read_jsonl, read_text, write_jsonl
+from utils.io import read_jsonl, write_jsonl
 
 app = typer.Typer(help="PsiloQA Generation Pipeline")
 
@@ -40,43 +41,24 @@ def generate_qa(
     input_path: Path = typer.Option(
         Path("data/raw/output.jsonl"),
         "--in",
-        help="Path to Wikipedia contexts JSONL (title, summary, language, url)",
+        help="Path to Wikipedia contexts JSONL",
     ),
     output_path: Path = typer.Option(Path("data/qa/output.jsonl"), "--out", help="Path to write QA JSONL"),
-    prompt_file: Path = typer.Option(
-        Path("psilo/prompts/wiki_qa.txt"),
-        "--prompt-file",
-        help="Path to the prompt",
-    ),
-    openai_api_key: str | None = typer.Option(None, "--openai-api-key", envvar="OPENAI_API_KEY"),
-    model: str = typer.Option("gpt-4o-mini", "--model", help="OpenAI model id (e.g., o3-mini, gpt-4o-mini)"),
-    temperature: float = typer.Option(1.0, "--temperature"),
-    seed: int | None = typer.Option(None, "--seed"),
 ):
     logger.info(f"Reading: {input_path}")
     rows = read_jsonl(str(input_path))
     logger.info(f"Rows: {len(rows)}")
 
-    prompt_template = read_text(str(prompt_file))
+    settings: QAGeneratorOpenAISettings = QAGeneratorOpenAISettings()
 
     async def _run():
-        client = AsyncOpenAI(api_key=openai_api_key)
-        return await generate_qa_for_summaries(
-            client=client,
-            model=model,
-            rows=rows,
-            prompt_template=prompt_template,
-            temperature=temperature,
-            seed=seed,
-            show_progress=True,
-            max_retries=3,
-            max_concurrency=8,
-            keep_order=True,
-        )
+        client = AsyncOpenAI(api_key=settings.openai_api_key.get_secret_value(), base_url=settings.base_url)
+        return await generate_qa_for_contexts(client=client, rows=rows, settings=settings)
 
     qa_rows = asyncio.run(_run())
+
     logger.info(f"Writing QA: {len(qa_rows)} → {output_path}")
-    write_jsonl(str(output_path), qa_rows, "a")
+    write_jsonl(output_path, qa_rows)
     logger.success("Done.")
 
 
@@ -125,23 +107,13 @@ def generate_llm_answers(
         pbar = tqdm(total=len(batch), desc=f"{rid}", leave=False)
 
         for (idx, sample), res in zip(batch, runner.answer_batch(questions)):
-            out = {
-                "language": sample.get("language"),
-                "question": sample["question"],
-                "gold_answer": sample.get("answer"),
-                "complexity": sample.get("complexity"),
-                "source_url": sample.get("source_url"),
-                "model": sample.get("model"),
-                "model_id": rid,
-                "hypothesis": res.text,
-                "gen_meta": res.meta,
-            }
+            out = sample | {"model_id": rid, "hypothesis": res.text, "gen_meta": res.meta}
             outputs.append(out)
             pbar.update(1)
         pbar.close()
 
     logger.info(f"Writing {len(outputs)} rows → {output_path}")
-    write_jsonl(str(output_path), outputs)
+    write_jsonl(output_path, outputs)
     logger.success("Done.")
 
 
@@ -167,27 +139,14 @@ def annotate(
     rows = read_jsonl(str(input_path))
     logger.info(f"Rows: {len(rows)}")
 
-    system_prompt = read_text(str(prompt_file))
-    template = """**Passage:** {p}\n**Question:** {q}\n**Golden answer:** {ga}\n**LLM answer:** {a}"""
+    settings = AnnotatorOpenAISettings()
 
     async def _run():
-        client = AsyncOpenAI(api_key=openai_api_key)
-        return await annotate_hypotheses(
-            client=client,
-            model=model,
-            rows=rows,
-            system_prompt=system_prompt,
-            prompt_template=template,
-            temperature=temperature,
-            seed=seed,
-            show_progress=True,
-            max_retries=3,
-            max_concurrency=8,
-            keep_order=True,
-        )
+        client = AsyncOpenAI(api_key=openai_api_key.get_secret_value())
+        return await annotate_hypotheses(client=client, model=model, rows=rows, settings=settings)
 
     qa_rows = asyncio.run(_run())
-    logger.info(f"Writing QA: {len(qa_rows)} → {output_path}")
+    logger.info(f"Writing annotated hypotheses: {len(qa_rows)} → {output_path}")
     write_jsonl(output_path, qa_rows, "a")
     logger.success("Done.")
 

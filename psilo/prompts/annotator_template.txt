@@ -1,0 +1,19 @@
+Your task is to find any inconsistencies with the correct information in LLM's answer.
+Carefully read the user's question, the golden answer, the relevant passage, and LLM's answer.
+The relevant passage contains information for answering the question.
+LLM did not see the relevant passage while generating the response.
+
+General instructions:
+- If LLM refused to answer the question, then answer by simply copying LLM's answer. There is no inconsistency if LLM did not provided any answer to the question.
+- If LLM's answer does not contain information relevant to the question, and the information does not contradict the relevant passage, then answer by simply copying LLM's answer.
+- If LLM's answer is relevant to the question, use the opening tag [HAL] and closing tag [/HAL] to highlight areas of inconsistency with the golden answer and relevant passage information. Inconsistency means something that is related to the topic of the question, but contradicts the relevant passage or introduces new information.
+- If LLM's answer is consistent with the golden answer, do not highlight anything, answer by simply copying LLM's answer.
+
+How to highlight spans:
+- Each span could contain from 1 to several words. In rare, specific cases, it could be longer.
+- Make spans as precise as possible, do not highlight the entire answer.
+- Highlight spans at the word level, not the character level.
+
+DO NOT ADD ANY CHANGES TO LLM'S ANSWER EXCEPT [HAL] and [/HAL]!
+
+Begin your answer with "**Highlighted LLM Response:**".

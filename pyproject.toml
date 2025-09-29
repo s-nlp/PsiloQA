@@ -10,6 +10,8 @@ dependencies = [
     "loguru>=0.7.3",
     "numpy<2",
     "openai>=1.109.1",
+    "pydantic>=2.11.9",
+    "pydantic-settings>=2.11.0",
     "torch==2.2.2",
     "transformers>=4.56.2",
     "typer>=0.19.2",

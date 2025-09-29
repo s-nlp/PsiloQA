@@ -3,9 +3,11 @@ import asyncio
 import json
 import random
 
+from dataset.settings import QAGeneratorOpenAISettings
 from loguru import logger
 from tqdm import tqdm
 from utils.constants import LONG_ANSWER_CONSTRAINT, SHORT_ANSWER_CONSTRAINT
+from utils.io import read_text
 
 
 def build_content(prompt_template: str, passage: str) -> str:
@@ -51,18 +53,7 @@ async def call_openai_once_async(
     return resp.choices[0].message.content or ""
 
 
-async def generate_qa_for_summaries(
-    client,  # AsyncOpenAI
-    model: str,
-    rows: list[dict],
-    prompt_template: str,
-    temperature: float,
-    seed: int | None = None,
-    show_progress: bool = True,
-    max_retries: int = 3,
-    max_concurrency: int = 8,
-    keep_order: bool = True,
-) -> list[dict]:
+async def generate_qa_for_contexts(client, rows: list[dict], settings: QAGeneratorOpenAISettings) -> list[dict]:
     """
     Asynchronous version. Sends multiple requests in parallel.
     Keeps the same prompt/parse behavior as your notebook.
@@ -71,49 +62,33 @@ async def generate_qa_for_summaries(
     - rows: dicts with 'summary' (or 'passage'), 'title', 'language', 'url'
     - keep_order: if True, results preserve input order
     """
-    if seed is not None:
-        random.seed(seed)
-
-    sem = asyncio.Semaphore(max_concurrency)
-    pbar = tqdm(total=len(rows), desc="QA generation...", leave=False) if show_progress else None
+    sem = asyncio.Semaphore(settings.max_concurrency)
+    pbar = tqdm(total=len(rows), desc="QA generation...", leave=False)
+    system_prompt = read_text(settings.system_prompt_path)
 
     async def process_one(idx: int, r: dict) -> list[dict]:
-        passage = r.get("summary") or r.get("passage") or ""
-        title = r.get("title", "")
-        language = r.get("language")
-        url = r.get("url")
+        passage = r.get("passage")
+        content = build_content(system_prompt, passage)
 
-        content = build_content(prompt_template, passage)
-
-        for attempt in range(1, max_retries + 1):
+        for attempt in range(1, settings.max_retries + 1):
             try:
                 async with sem:
                     raw = await call_openai_once_async(
                         client=client,
-                        model=model,
+                        model=settings.model,
                         content=content,
-                        temperature=temperature,
+                        temperature=settings.temperature,
                     )
                 triples = parse_model_output(raw)
                 out_rows: list[dict] = []
                 for t in triples:
-                    out_rows.append(
-                        {
-                            "language": language,
-                            "title": title,
-                            "source_url": url,
-                            "question": t["question"],
-                            "answer": t["answer"],
-                            "complexity": t.get("complexity", ""),
-                            "model": model,
-                        }
-                    )
+                    out_rows.append(r | {"question": t["question"], "gold_answer": t["answer"], "complexity": t.get("complexity", ""), "model": settings.model})
                 return out_rows
             except Exception as e:
                 # exact retry behavior is up to you; keeping it minimal
-                logger.warning(f"[retry {attempt}/{max_retries}] {e}")
+                logger.warning(f"[retry {attempt}/{settings.max_retries}] {e}")
                 await asyncio.sleep(min(2 ** (attempt - 1), 8))
-        logger.error(f"Failed for: {title!r}")
+        logger.error(f"Failed for: {r.get('source_url')}")
         return []
         # pbar is updated in finally below
 
@@ -130,8 +105,7 @@ async def generate_qa_for_summaries(
     if pbar:
         pbar.close()
 
-    if keep_order:
-        results.sort(key=lambda x: x[0])  # restore input order
+    results.sort(key=lambda x: x[0])  # restore input order
     flat: list[dict] = []
     for _, batch in results:
         flat.extend(batch)
