@@ -38,6 +38,3 @@ ignore = ["UP035"]
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
-
-[tool.uv.extra-build-dependencies]
-    xformers = ["torch"]

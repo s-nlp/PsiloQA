@@ -1,11 +1,12 @@
 from typing import Sequence
 
-from dataset.answer_generator.runner import VLLMRunnerWithChatTemplate
+# from dataset.answer_generator.runner import VLLMRunnerWithChatTemplate
+from dataset.answer_generator.runner import RunnerWithChatTemplate
 
 from ..registry import register
 
 
-class Qwen2Runner(VLLMRunnerWithChatTemplate):
+class Qwen2Runner(RunnerWithChatTemplate):
     @property
     def runner_id(self) -> str:
         return "Qwen/Qwen2-7B-Instruct"
