@@ -22,11 +22,6 @@ class OcciglotRunner(RunnerWithChatTemplate):
     def generation_params(self) -> dict:
         return {
             "max_new_tokens": 512,
-            "terminators": [
-                self._tokenizer.convert_tokens_to_ids("<|im_end|>"),
-                self._tokenizer.convert_tokens_to_ids("<|eot_id|>"),
-                self._tokenizer.encode("\n")[-1],
-            ],
             "pad_token_id": self._tokenizer.eos_token_id,
             "do_sample": True,
         }

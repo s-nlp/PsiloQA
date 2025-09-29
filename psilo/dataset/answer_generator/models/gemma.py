@@ -19,11 +19,6 @@ class GemmaRunner(RunnerWithChatTemplate):
         return {
             "max_new_tokens": 512,
             "do_sample": True,
-            "terminators": [
-                self._tokenizer.eos_token_id,
-                self._tokenizer.convert_tokens_to_ids("<|eot_id|>"),
-                self._tokenizer.encode("\n")[-1],
-            ],
         }
 
 
