@@ -4,7 +4,6 @@ from utils.constants import SEED
 def assign_runners_by_language(
     samples: list[dict],
     choose_runner_for_lang,  # callable(lang, seed) -> runner or None
-    seed: int | None = None,
 ) -> dict[str, list[tuple[int, dict]]]:
     """
     Returns mapping runner_id -> list of (index, sample).

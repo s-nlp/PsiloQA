@@ -72,7 +72,6 @@ def generate_llm_answers(
     ),
     output_path: Path = typer.Option("data/hypotheses/out.jsonl", "--out"),
     limit: int | None = typer.Option(None, "--limit", help="Process only N samples"),
-    seed: int | None = typer.Option(42, "--seed"),
 ):
     from dataset.answer_generator import models  # noqa: F401
     from dataset.answer_generator.batching import assign_runners_by_language
@@ -86,7 +85,6 @@ def generate_llm_answers(
     buckets = assign_runners_by_language(
         samples=rows,
         choose_runner_for_lang=sample_runner_for_language,
-        seed=seed,
     )
     if not buckets:
         logger.error("No runners matched the sample languages.")
@@ -104,14 +102,15 @@ def generate_llm_answers(
         logger.info(f"Loading runner: {rid}")
         runner.load()
 
-        questions = [s["question"] for _, s in batch]
         pbar = tqdm(total=len(batch), desc=f"{rid}", leave=False)
 
-        for (_, sample), res in zip(batch, runner.answer_batch(questions)):
-            out = sample | {"model_id": rid, "hypothesis": res.text, "gen_meta": res.meta}
-            outputs.append(out)
+        for _, sample in batch:
+            runner_result = runner.answer_one(sample["question"])
+            outputs.append(sample | {"model_id": rid, "hypothesis": runner_result.text, "gen_meta": runner_result.meta})
             pbar.update(1)
         pbar.close()
+
+        runner.destroy()
 
     logger.info(f"Writing {len(outputs)} rows → {output_path}")
     write_jsonl(output_path, outputs)
