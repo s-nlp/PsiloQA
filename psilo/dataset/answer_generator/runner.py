@@ -43,6 +43,7 @@ class BaseRunner(ABC):
 
         if self._tokenizer.pad_token is None:
             self._tokenizer.pad_token = self._tokenizer.eos_token
+            self._model.generation_config.pad_token_id = self._tokenizer.pad_token_id
 
     def destroy(self) -> None:
         del self._model
@@ -59,9 +60,6 @@ class BaseRunner(ABC):
 
     def answer_batch(self, questions: Iterable[str]) -> list[GenerationResult]:
         return [self.answer_one(q) for q in questions]
-
-
-import torch
 
 
 class RunnerWithChatTemplate(BaseRunner):

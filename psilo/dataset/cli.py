@@ -63,8 +63,8 @@ def generate_qa(
     logger.success("Done.")
 
 
-@app.command("generate_llm_answers")
-def generate_llm_answers(
+@app.command("generate_hypotheses")
+def generate_hypotheses(
     input_path: Path = typer.Option(
         "data/qa/output.jsonl",
         "--in",
@@ -117,7 +117,7 @@ def generate_llm_answers(
     logger.success("Done.")
 
 
-@app.command("annotate")
+@app.command("annotate_hypotheses")
 def annotate(
     input_path: Path = typer.Option(
         Path("data/hypotheses/output.jsonl"),
