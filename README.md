@@ -1,7 +1,5 @@
-# PsiloQA: generate multilingual span-level inconsistency detection data synthetically!
+# PsiloQA: Generate multilingual span-level inconsistency detection data synthetically!
 ![PsiloQA logo](images/logo.png)
-
-
 
 ## Installation
 Install uv:
@@ -14,15 +12,20 @@ Install dependencies:
 uv sync --no-dev
 ```
 
+Copy env.example and fill env variables:
+```bash
+cp env.example .env
+```
+
 ## Dataset
 Parse random pages from Wikipedia:
 ```bash
 uv run psilo dataset get_contexts --num-pages 10 --language en --language ru
 ```
 
-Generate QA pairs:
+Generate QA pairs (fill `QA_GENERATOR_OPENAI_MODEL` variable in .env):
 ```bash
-OPENAI_API_KEY=... uv run psilo dataset generate_qa
+uv run psilo dataset generate_qa
 ```
 
 Generate LLM hypotheses:
@@ -30,7 +33,7 @@ Generate LLM hypotheses:
 uv run psilo dataset generate_llm_answers
 ```
 
-Annotate hypotheses
+Annotate hypotheses (fill `ANNOTATOR_OPENAI_API_KEY` variable in .env):
 ```bash
 uv run psilo dataset annotate
 ```

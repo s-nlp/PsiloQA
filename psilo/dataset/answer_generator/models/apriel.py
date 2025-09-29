@@ -1,31 +1,19 @@
 from typing import Any, Sequence
 
-from dataset.answer_generator.runner import BaseRunner, GenerationResult
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from dataset.answer_generator.runner import GenerationResult, RunnerWithChatTemplate
 from utils.constants import DEVICE
 
 from ..registry import register
 
 
-class AprielRunner(BaseRunner):
-    def __init__(self):
-        self._tokenizer = None
-        self._model = None
-
+class AprielRunner(RunnerWithChatTemplate):
     @property
     def runner_id(self) -> str:
-        return "ServiceNow-AI-Apriel-5B-Instruct"
+        return "ServiceNow-AI/Apriel-5B-Instruct"
 
     @property
     def languages(self) -> Sequence[str]:
         return ["en"]
-
-    def load(self) -> None:
-        if self._model is not None:
-            return
-        name = "ServiceNow-AI/Apriel-5B-Instruct"
-        self._tokenizer = AutoTokenizer.from_pretrained(name)
-        self._model = AutoModelForCausalLM.from_pretrained(name).to(DEVICE)
 
     def _format(self, q: str) -> dict[str, Any]:
         messages = [{"role": "system", "content": "You are a helpful AI assistant that provides accurate and concise information."}, {"role": "user", "content": q}]

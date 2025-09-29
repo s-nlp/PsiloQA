@@ -1,7 +1,6 @@
 from typing import Any, Sequence
 
 from dataset.answer_generator.runner import BaseRunner, GenerationResult
-from transformers import AutoModelForCausalLM, AutoTokenizer
 from utils.constants import DEVICE
 
 from ..registry import register
@@ -14,21 +13,18 @@ class BloomZhRunner(BaseRunner):
 
     @property
     def runner_id(self) -> str:
-        return "ikala-bloom-zh-3b-chat"
+        return "ikala/bloom-zh-3b-chat"
 
     @property
     def languages(self) -> Sequence[str]:
         return ["zh"]
 
-    def load(self) -> None:
-        if self._model is not None:
-            return
-        name = "ikala/bloom-zh-3b-chat"
-        self._tokenizer = AutoTokenizer.from_pretrained(name)
-        self._model = AutoModelForCausalLM.from_pretrained(name).to(DEVICE)
-
     def _format(self, q: str) -> dict[str, Any]:
         return self._tokenizer(f"<|prompter|>{q}</s><|assistant|>", return_tensors="pt").to(DEVICE)
+
+    @property
+    def template(self) -> str:
+        return "<|prompter|>{}</s><|assistant|>"
 
     def answer_one(self, question: str) -> GenerationResult:
         assert self._model is not None and self._tokenizer is not None, "call load() first"

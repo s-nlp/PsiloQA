@@ -1,0 +1,4 @@
+**Passage:** {passage}
+**Question:** {question}
+**Golden answer:** {gold_answer}
+**LLM answer:** {llm_answer}

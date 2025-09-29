@@ -85,12 +85,10 @@ async def generate_qa_for_contexts(client, rows: list[dict], settings: QAGenerat
                     out_rows.append(r | {"question": t["question"], "gold_answer": t["answer"], "complexity": t.get("complexity", ""), "model": settings.model})
                 return out_rows
             except Exception as e:
-                # exact retry behavior is up to you; keeping it minimal
                 logger.warning(f"[retry {attempt}/{settings.max_retries}] {e}")
                 await asyncio.sleep(min(2 ** (attempt - 1), 8))
         logger.error(f"Failed for: {r.get('source_url')}")
         return []
-        # pbar is updated in finally below
 
     async def wrapped(idx: int, r: dict):
         try:

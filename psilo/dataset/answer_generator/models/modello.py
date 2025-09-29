@@ -1,50 +1,33 @@
 import os
-from typing import Any, Sequence
+from typing import Sequence
 
-from dataset.answer_generator.runner import BaseRunner, GenerationResult
+from dataset.answer_generator.runner import RunnerWithChatTemplate
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from utils.constants import DEVICE
 
 from ..registry import register
 
 
-class ModelloRunner(BaseRunner):
+class ModelloRunner(RunnerWithChatTemplate):
     def __init__(self):
         self._tokenizer = None
         self._model = None
 
     @property
     def runner_id(self) -> str:
-        return "sapienzanlp-modello-italia-9b"
+        return "sapienzanlp/modello-italia-9b"
 
     @property
     def languages(self) -> Sequence[str]:
         return ["it"]
 
     def load(self) -> None:
-        if self._model is not None:
-            return
-        name = "sapienzanlp/modello-italia-9b"
-        self._tokenizer = AutoTokenizer.from_pretrained(name, token=os.getenv("HF_TOKEN"))
-        self._model = AutoModelForCausalLM.from_pretrained(name, token=os.getenv("HF_TOKEN")).to(DEVICE)
+        self._tokenizer = AutoTokenizer.from_pretrained(self.runner_id, token=os.getenv("HF_TOKEN"))
+        self._model = AutoModelForCausalLM.from_pretrained(self.runner_id, token=os.getenv("HF_TOKEN")).to(DEVICE)
 
-    def _format(self, q: str) -> dict[str, Any]:
-        message = [{"role": "user", "content": q}]
-        prompt = self._tokenizer.apply_chat_template(message, add_generation_prompt=True, tokenize=False)
-        return self._tokenizer.encode(prompt, return_tensors="pt").to(DEVICE)
-
-    def answer_one(self, question: str) -> GenerationResult:
-        inputs = self._format(question)
-
-        output = self._model.generate(
-            inputs,
-            max_new_tokens=512,
-            do_sample=True,
-            eos_token_id=self._tokenizer.eos_token_id,
-            pad_token_id=self._tokenizer.eos_token_id,
-        )
-        response_token_ids = output[0].tolist()[len(inputs[0]) :]
-        return GenerationResult(text=self._tokenizer.decode(response_token_ids, skip_special_tokens=True))
+    @property
+    def generation_params(self) -> dict:
+        return {"max_new_tokens": 512, "do_sample": True, "eos_token_id": self._tokenizer.eos_token_id, "pad_token_id": self._tokenizer.eos_token_id}
 
 
 register(ModelloRunner())

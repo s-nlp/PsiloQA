@@ -1,5 +1,5 @@
 from . import (
-    apriel,  # noqa: F401
+    # apriel,  # noqa: F401
     bloom_de,  # noqa: F401
     bloom_zh_3b,  # noqa: F401
     croissant,  # noqa: F401

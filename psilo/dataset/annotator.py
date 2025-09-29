@@ -3,6 +3,7 @@ import asyncio
 from dataset.settings import AnnotatorOpenAISettings
 from loguru import logger
 from tqdm.auto import tqdm
+from utils.id_generator import make_sample_id
 from utils.io import read_text
 
 
@@ -49,14 +50,17 @@ async def annotate_hypotheses(client, rows: list[dict], settings: AnnotatorOpenA
                         client=client,
                         model=settings.model,
                         system_prompt=system_prompt,
-                        user_prompt=template.format(q=question, p=passage, ga=gold_answer, a=hypothesis),
+                        user_prompt=template.format(question=question, passage=passage, gold_answer=gold_answer, llm_answer=hypothesis),
                         temperature=settings.temperature,
                     )
-                output = parse_model_output(raw)
-                return r | {
+                annotated_output = parse_model_output(raw)
+                output_dict = r | {
                     "annotator_model": settings.model,
-                    "annotated": output,
+                    "annotation": annotated_output,
                 }
+
+                # Unique ID generation based on hash
+                return {"id": make_sample_id(output_dict, keys=["language", "question", "gold_answer", "hypothesis", "model_id", "annotator_model", "annotation"])} | output_dict
             except Exception as e:
                 logger.warning(f"[retry {attempt}/{settings.max_retries}] {e}")
                 await asyncio.sleep(min(2 ** (attempt - 1), 8))

@@ -11,6 +11,7 @@ from dataset.wiki_contexts import get_random_pages
 from loguru import logger
 from openai import AsyncOpenAI
 from tqdm import tqdm
+from utils.constants import AVAILABLE_LANGUAGES
 from utils.io import read_jsonl, write_jsonl
 
 app = typer.Typer(help="PsiloQA Generation Pipeline")
@@ -18,7 +19,7 @@ app = typer.Typer(help="PsiloQA Generation Pipeline")
 
 @app.command("get_contexts")
 def get_contexts(
-    languages: list[str] = typer.Option(["en"], "--language", "-l", help="ISO codes, e.g. en ru de"),
+    languages: list[str] = typer.Option(AVAILABLE_LANGUAGES, "--language", "-l", help="ISO codes, e.g. en ru de"),
     num_pages: int = typer.Option(100, "--num-pages", "-n", help="Pages per language"),
     min_string_length: int = typer.Option(100, "--min-len", help="Min length of page text"),
     output_path: Path = typer.Option("data/raw/output.jsonl", "--out", help="Path to store the contexts"),
@@ -106,7 +107,7 @@ def generate_llm_answers(
         questions = [s["question"] for _, s in batch]
         pbar = tqdm(total=len(batch), desc=f"{rid}", leave=False)
 
-        for (idx, sample), res in zip(batch, runner.answer_batch(questions)):
+        for (_, sample), res in zip(batch, runner.answer_batch(questions)):
             out = sample | {"model_id": rid, "hypothesis": res.text, "gen_meta": res.meta}
             outputs.append(out)
             pbar.update(1)
@@ -125,15 +126,6 @@ def annotate(
         help="Path to Wikipedia contexts JSONL (title, summary, language, url)",
     ),
     output_path: Path = typer.Option(Path("data/annotated/output.jsonl"), "--out", help="Path to write annotated hypotheses"),
-    prompt_file: Path = typer.Option(
-        Path("psilo/prompts/annotator.txt"),
-        "--prompt-file",
-        help="Path to the prompt",
-    ),
-    openai_api_key: str | None = typer.Option(None, "--openai-api-key", envvar="OPENAI_API_KEY"),
-    model: str = typer.Option("gpt-4o-mini", "--model", help="OpenAI model id (e.g., o3-mini, gpt-4o-mini)"),
-    temperature: float = typer.Option(1.0, "--temperature"),
-    seed: int | None = typer.Option(None, "--seed"),
 ):
     logger.info(f"Reading: {input_path}")
     rows = read_jsonl(str(input_path))
@@ -142,8 +134,8 @@ def annotate(
     settings = AnnotatorOpenAISettings()
 
     async def _run():
-        client = AsyncOpenAI(api_key=openai_api_key.get_secret_value())
-        return await annotate_hypotheses(client=client, model=model, rows=rows, settings=settings)
+        client = AsyncOpenAI(api_key=settings.openai_api_key.get_secret_value())
+        return await annotate_hypotheses(client=client, rows=rows, settings=settings)
 
     qa_rows = asyncio.run(_run())
     logger.info(f"Writing annotated hypotheses: {len(qa_rows)} → {output_path}")
