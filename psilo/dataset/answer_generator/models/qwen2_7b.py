@@ -1,11 +1,11 @@
 from typing import Sequence
 
-from dataset.answer_generator.runner import RunnerWithChatTemplate
+from dataset.answer_generator.runner import VLLMRunnerWithChatTemplate
 
 from ..registry import register
 
 
-class Qwen2Runner(RunnerWithChatTemplate):
+class Qwen2Runner(VLLMRunnerWithChatTemplate):
     @property
     def runner_id(self) -> str:
         return "Qwen/Qwen2-7B-Instruct"
@@ -42,7 +42,7 @@ class Qwen2Runner(RunnerWithChatTemplate):
     @property
     def generation_params(self) -> dict:
         return {
-            "max_new_tokens": 512,
+            "max_tokens": 512,
             "do_sample": True,
             "temperature": 0.7,
             "top_k": 50,
