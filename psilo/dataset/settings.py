@@ -4,6 +4,16 @@ from pydantic import Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
+class HFSettings(BaseSettings):
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_prefix="HF_SETTINGS_",
+        extra="ignore",
+    )
+
+    token: SecretStr
+
+
 class OpenAISettings(BaseSettings):
     openai_api_key: SecretStr
     model: str = Field(default="gpt-4o-mini")
@@ -14,12 +24,13 @@ class OpenAISettings(BaseSettings):
 
 
 class QAGeneratorOpenAISettings(OpenAISettings):
+    system_prompt_path: Path = Field(default=Path("psilo/dataset/prompts/qa_generator_system_prompt.txt"))
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_prefix="QA_GENERATOR_",
         extra="ignore",
     )
-    system_prompt_path: Path = Field(default=Path("psilo/dataset/prompts/qa_generator_system_prompt.txt"))
 
 
 class AnnotatorOpenAISettings(OpenAISettings):

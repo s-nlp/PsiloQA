@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import Any, Iterable, Sequence
 
+from dataset.settings import HFSettings
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from utils.constants import DEVICE
 
@@ -16,6 +17,7 @@ class BaseRunner(ABC):
     def __init__(self):
         self._tokenizer = None
         self._model = None
+        self._settings = HFSettings()
 
     @property
     @abstractmethod
@@ -34,10 +36,8 @@ class BaseRunner(ABC):
     def languages(self) -> Sequence[str]: ...
 
     def load(self) -> None:
-        self._tokenizer = AutoTokenizer.from_pretrained(
-            self.runner_id,
-        )
-        self._model = AutoModelForCausalLM.from_pretrained(self.runner_id).to(DEVICE)
+        self._tokenizer = AutoTokenizer.from_pretrained(self.runner_id, token=self._settings.token.get_secret_value())
+        self._model = AutoModelForCausalLM.from_pretrained(self.runner_id, token=self._settings.token.get_secret_value()).to(DEVICE)
 
     @abstractmethod
     def answer_one(self, question: str) -> GenerationResult: ...
@@ -59,7 +59,7 @@ class RunnerWithChatTemplate(BaseRunner):
     def answer_one(self, question: str) -> GenerationResult:
         input_ids = self._format(question)
         output = self._model.generate(input_ids, **self.generation_params)
-        return GenerationResult(text=self._tokenizer.decode(output[0, input_ids.shape[-1] :], skip_special_tokens=True))
+        return GenerationResult(text=self._tokenizer.decode(output[0, input_ids.shape[-1] :], skip_special_tokens=True), meta=self.generation_params)
 
 
 class RunnerWithCustomTemplate(BaseRunner):
@@ -74,4 +74,4 @@ class RunnerWithCustomTemplate(BaseRunner):
     def answer_one(self, question: str) -> GenerationResult:
         input = self._format(question)
         output = self._model.generate(**input, **self.generation_params)[0]
-        return GenerationResult(text=self._tokenizer.decode(output[0][input["input_ids"].shape[-1] :], skip_special_tokens=True).strip())
+        return GenerationResult(text=self._tokenizer.decode(output[0][input["input_ids"].shape[-1] :], skip_special_tokens=True).strip(), meta=self.generation_params)

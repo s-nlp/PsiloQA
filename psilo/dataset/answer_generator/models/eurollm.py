@@ -1,9 +1,6 @@
-import os
 from typing import Sequence
 
 from dataset.answer_generator.runner import RunnerWithChatTemplate
-from transformers import AutoModelForCausalLM, AutoTokenizer
-from utils.constants import DEVICE
 
 from ..registry import register
 
@@ -56,10 +53,6 @@ class EuroLLMRunner(RunnerWithChatTemplate):
     @property
     def system_prompt(self) -> str:
         return "You are EuroLLM --- an AI assistant specialized in European languages that provides safe, educational and helpful answers."
-
-    def load(self) -> None:
-        self._tokenizer = AutoTokenizer.from_pretrained(self.runner_id, token=os.getenv("HF_TOKEN"))
-        self._model = AutoModelForCausalLM.from_pretrained(self.runner_id, token=os.getenv("HF_TOKEN")).to(DEVICE)
 
     @property
     def generation_params(self) -> dict:
