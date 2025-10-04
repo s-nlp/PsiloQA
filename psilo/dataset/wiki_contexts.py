@@ -1,8 +1,11 @@
-# psilo/dataset/wiki.py
+import asyncio
+from typing import Iterable
 from urllib.parse import quote
 
 import requests
+import wikipediaapi
 from loguru import logger
+from tqdm.asyncio import tqdm as tqdm_async
 from utils.constants import WIKI_API
 
 
@@ -29,21 +32,13 @@ def get_random_titles(lang: str, n: int, user_agent: str | None = None) -> list[
     return titles[:n]
 
 
-# psilo/dataset/wiki_contexts.py
-
-import asyncio
-import time
-from typing import Iterable
-from urllib.parse import quote
-
-import wikipediaapi
-from tqdm.asyncio import tqdm as tqdm_async
-
 def _norm_title(title: str) -> str:
     return (title or "").replace(" ", "_")
 
+
 def _full_url(lang: str, title: str) -> str:
     return f"https://{lang}.wikipedia.org/wiki/{quote(_norm_title(title), safe='_()')}"
+
 
 async def _fetch_page_text_wikipediaapi(
     wiki: wikipediaapi.Wikipedia,
@@ -78,6 +73,7 @@ async def _fetch_page_text_wikipediaapi(
         except Exception:
             return None
 
+
 async def get_random_pages_async(
     *,
     lang: str,
@@ -100,7 +96,9 @@ async def get_random_pages_async(
     sem = asyncio.Semaphore(max_concurrency)
     coros = [
         _fetch_page_text_wikipediaapi(
-            wiki, lang, t,
+            wiki,
+            lang,
+            t,
             min_len=min_len,
             sem=sem,
             per_request_sleep=per_request_sleep,
@@ -110,7 +108,7 @@ async def get_random_pages_async(
 
     results: list[dict] = []
     if show_progress:
-         for done in tqdm_async.as_completed(coros, total=len(coros), desc=f"{lang}: fetching full pages", leave=False):
+        for done in tqdm_async.as_completed(coros, total=len(coros), desc=f"{lang}: fetching full pages", leave=False):
             row = await done
             if row:
                 results.append(row)

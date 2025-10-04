@@ -112,7 +112,6 @@ class RunnerWithChatTemplate(BaseRunner):
 #             messages.append({"role": "system", "content": self.system_prompt})
 #         messages.append({"role": "user", "content": user_prompt})
 
-#         # ВАЖНО: для instruct-моделей используем chat_template и получаем СТРОКУ
 #         return self._tokenizer.apply_chat_template(
 #             messages,
 #             add_generation_prompt=True,
@@ -120,8 +119,6 @@ class RunnerWithChatTemplate(BaseRunner):
 #         )
 
 #     def load(self) -> None:
-#         # Токенайзер нужен для chat_template и decode (хотя vLLM уже даёт готовый текст)
-#         # Если требуется приватный токен HF — возьми из self._settings.token, как у тебя принято
 #         hf_token = getattr(getattr(self, "_settings", None), "token", None)
 #         hf_token = hf_token.get_secret_value() if hf_token else None
 

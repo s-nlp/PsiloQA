@@ -48,15 +48,13 @@ uv run psilo dataset generate_qa
 ```
 
 ### LLM hypotheses
-Generate LLM hypotheses:
-```bash
-uv run psilo dataset generate_hypotheses
-```
-
 All available models are listed in `psilo/dataset/answer_generator/models`. You can add any new Hugging Face model by implementing a runner class that inherits from either:
 - `RunnerWithChatTemplate` — if the tokenizer supports chat templates, or
 - `RunnerWithCustomTemplate` — if it does not.
 Some models require a Hugging Face access token. Make sure to provide `HF_TOKEN` in your `.env` file — models that need it will be skipped if the token is missing.
+```bash
+uv run psilo dataset generate_hypotheses
+```
 
 ### Hypotheses annotation
 Annotate hypotheses (fill `ANNOTATOR_OPENAI_API_KEY` variable in .env):

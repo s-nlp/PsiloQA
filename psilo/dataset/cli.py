@@ -35,14 +35,7 @@ def get_contexts(
             logger.info(f"Sampling {num_pages} pages from {lang} Wikipedia (async)...")
 
             async def _run_one_lang():
-                return await get_random_pages_async(
-                    lang=lang,
-                    n=num_pages,
-                    min_len=min_string_length,
-                    show_progress=True,
-                    per_request_sleep=per_request_sleep,
-                    max_concurrency=int(max_concurrency)
-                )
+                return await get_random_pages_async(lang=lang, n=num_pages, min_len=min_string_length, show_progress=True, per_request_sleep=per_request_sleep, max_concurrency=int(max_concurrency))
 
             rows = asyncio.run(_run_one_lang())
 
@@ -51,7 +44,6 @@ def get_contexts(
             total += len(rows)
             logger.success(f"{lang}: saved {len(rows)} rows")
     logger.success(f"Saved total {total} rows → {output_path}")
-
 
 
 @app.command("generate_qa")
@@ -89,12 +81,13 @@ def generate_hypotheses(
     ),
     output_path: Path = typer.Option("data/hypotheses/out.jsonl", "--out"),
     limit: int | None = typer.Option(None, "--limit", help="Process only N samples"),
+    checkpoints: list[str] | None = typer.Option(None, "--model", "-m", help="List of models for hypotheses generation. If None, all possible models will be used")
 ):
     from dataset.answer_generator import models  # noqa: F401
     from dataset.answer_generator.batching import assign_runners_by_language
     from dataset.answer_generator.registry import all_runners, sample_runner_for_language
     from dataset.answer_generator.runner import RunnerType
-    from huggingface_hub.utils import HfHubHTTPError, GatedRepoError, RepositoryNotFoundError
+    from huggingface_hub.utils import GatedRepoError, HfHubHTTPError, RepositoryNotFoundError
 
     rows = read_jsonl(str(input_path))
     if limit:
@@ -104,6 +97,7 @@ def generate_hypotheses(
     buckets = assign_runners_by_language(
         samples=rows,
         choose_runner_for_lang=sample_runner_for_language,
+        checkpoints=checkpoints
     )
     if not buckets:
         logger.error("No runners matched the sample languages.")
@@ -121,7 +115,7 @@ def generate_hypotheses(
         logger.info(f"Loading runner: {rid}")
         try:
             runner.load()
-        except (HfHubHTTPError, GatedRepoError, RepositoryNotFoundError) as E:
+        except (HfHubHTTPError, GatedRepoError, RepositoryNotFoundError):
             logger.warning(f"Model {rid} not found or HF_TOKEN with the access is not provided")
             continue
 
