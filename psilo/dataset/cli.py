@@ -94,6 +94,7 @@ def generate_hypotheses(
     from dataset.answer_generator.batching import assign_runners_by_language
     from dataset.answer_generator.registry import all_runners, sample_runner_for_language
     from dataset.answer_generator.runner import RunnerType
+    from huggingface_hub.utils import HfHubHTTPError, GatedRepoError, RepositoryNotFoundError
 
     rows = read_jsonl(str(input_path))
     if limit:
@@ -118,7 +119,11 @@ def generate_hypotheses(
 
         runner = all_runners()[rid]
         logger.info(f"Loading runner: {rid}")
-        runner.load()
+        try:
+            runner.load()
+        except (HfHubHTTPError, GatedRepoError, RepositoryNotFoundError) as E:
+            logger.warning(f"Model {rid} not found or HF_TOKEN with the access is not provided")
+            continue
 
         if runner.TYPE == RunnerType.VLLM:
             questions = [s["question"] for _, s in batch]

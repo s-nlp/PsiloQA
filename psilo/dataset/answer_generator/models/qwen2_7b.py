@@ -43,7 +43,7 @@ class Qwen2Runner(RunnerWithChatTemplate):
     @property
     def generation_params(self) -> dict:
         return {
-            "max_tokens": 512,
+            "max_new_tokens": 512,
             "do_sample": True,
             "temperature": 0.7,
             "top_k": 50,
