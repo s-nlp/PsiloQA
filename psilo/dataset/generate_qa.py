@@ -8,6 +8,7 @@ from loguru import logger
 from tqdm import tqdm
 from utils.constants import LONG_ANSWER_CONSTRAINT, SHORT_ANSWER_CONSTRAINT
 from utils.io import read_text
+from utils.openai import call_openai_once_async
 
 
 def build_content(prompt_template: str, passage: str) -> str:
@@ -39,20 +40,6 @@ def parse_model_output(raw: str) -> list[dict]:
     return norm
 
 
-async def call_openai_once_async(
-    client,
-    model: str,
-    content: str,
-    temperature: float,
-) -> str:
-    resp = await client.chat.completions.create(
-        model=model,
-        messages=[{"role": "user", "content": content}],
-        temperature=temperature,
-    )
-    return resp.choices[0].message.content or ""
-
-
 async def generate_qa_for_contexts(client, rows: list[dict], settings: QAGeneratorOpenAISettings) -> list[dict]:
     """
     Asynchronous version. Sends multiple requests in parallel.
@@ -76,7 +63,7 @@ async def generate_qa_for_contexts(client, rows: list[dict], settings: QAGenerat
                     raw = await call_openai_once_async(
                         client=client,
                         model=settings.model,
-                        content=content,
+                        user_prompt=content,
                         temperature=settings.temperature,
                     )
                 triples = parse_model_output(raw)

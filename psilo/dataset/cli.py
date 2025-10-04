@@ -5,8 +5,9 @@ from pathlib import Path
 
 import typer
 from dataset.annotator import annotate_hypotheses
+from dataset.filter_samples import filter_rows_with_heuristics, run_llm_filters_async
 from dataset.generate_qa import generate_qa_for_contexts
-from dataset.settings import AnnotatorOpenAISettings, QAGeneratorOpenAISettings
+from dataset.settings import AnnotatorOpenAISettings, FilterOpenAISettings, QAGeneratorOpenAISettings
 from dataset.wiki_contexts import get_random_pages
 from loguru import logger
 from openai import AsyncOpenAI
@@ -153,4 +154,31 @@ def annotate(
 
 
 @app.command("filter")
-def cmd_filter(): ...
+def filter(
+    input_path: Path = typer.Option(
+        Path("data/annotated/output.jsonl"),
+        "--in",
+        help="Path to annotated hypotheses",
+    ),
+    output_path: Path = typer.Option(Path("data/filtered/output.jsonl"), "--out", help="Path to write filtered samples"),
+):
+    logger.info(f"Reading: {input_path}")
+    rows = read_jsonl(str(input_path))
+
+    logger.info("Stage 1: heuristic-based filtration")
+
+    filtered_rows = filter_rows_with_heuristics(rows)
+
+    logger.info("Stage 2: LLM-based filtration")
+
+    settings = FilterOpenAISettings()
+
+    async def _run():
+        client = AsyncOpenAI(api_key=settings.openai_api_key.get_secret_value())
+        return await run_llm_filters_async(client=client, rows=filtered_rows, settings=settings)
+
+    filtered_rows = asyncio.run(_run())
+
+    logger.info(f"Writing filtered samples: {len(filtered_rows)} → {output_path}")
+    write_jsonl(output_path, filtered_rows, "a")
+    logger.success("Done.")

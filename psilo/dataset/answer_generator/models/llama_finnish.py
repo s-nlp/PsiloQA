@@ -16,7 +16,7 @@ class LlamaFinnishRunner(RunnerWithCustomTemplate):
 
     @property
     def prompt_template(self) -> str:
-        return """<|alku|> Olet tekoälyavustaja. Seuraavaksi saat kysymyksen tai tehtävän. Kirjoita vastaus parhaasi mukaan siten että se täyttää kysymyksen tai tehtävän vaatimukset.\n<|ihminen|> Kysymys/Tehtävä:\n{}\n<|avustaja|> Vastauksesi:\n"""
+        return """<|alku|> Olet tekoälyavustaja. Seuraavaksi saat kysymyksen tai tehtävän. Kirjoita vastaus parhaasi mukaan siten että se täyttää kysymyksen tai tehtävän vaatimukset.\n<|ihminen|> Kysymys/Tehtävä:\n{}\n<|avustaja|> Vastauksesi:\n"""  # noqa: E501
 
     @property
     def generation_params(self) -> dict:
@@ -29,7 +29,6 @@ class LlamaFinnishRunner(RunnerWithCustomTemplate):
                 self._tokenizer.encode("\n")[-1],
             ],
             "pad_token_id": self._tokenizer.eos_token_id,
-            "do_sample": True,
         }
 
 
