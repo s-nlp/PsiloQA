@@ -81,7 +81,7 @@ def generate_hypotheses(
     ),
     output_path: Path = typer.Option("data/hypotheses/out.jsonl", "--out"),
     limit: int | None = typer.Option(None, "--limit", help="Process only N samples"),
-    checkpoints: list[str] | None = typer.Option(None, "--model", "-m", help="List of models for hypotheses generation. If None, all possible models will be used")
+    checkpoints: Annotated[list[str], typer.Option("--model", "-m", help="List of models for hypotheses generation. If None, all possible models will be used")] = []
 ):
     from dataset.answer_generator import models  # noqa: F401
     from dataset.answer_generator.batching import assign_runners_by_language
@@ -204,6 +204,7 @@ def pipeline(
     num_pages: int = typer.Option(10, "--num-pages", "-n", help="Pages per language for context sampling"),
     languages: list[str] = typer.Option(None, "--language", "-l", help="Languages (default: 14 from paper)"),
     limit: int | None = typer.Option(None, "--limit", help="Limit for QA/hypothesis generation"),
+    checkpoints: Annotated[list[str], typer.Option("--model", "-m", help="List of models for hypotheses generation. If None, all possible models will be used")] = []
 ):
     """
     Run the full PsiloQA dataset generation pipeline step by step.
@@ -227,6 +228,7 @@ def pipeline(
         input_path=Path("data/qa/output.jsonl"),
         output_path=Path("data/hypotheses/output.jsonl"),
         limit=limit,
+        checkpoints=checkpoints
     )
 
     typer.echo("🧩 [4/5] Annotating hypotheses...")
