@@ -1,5 +1,21 @@
 # PsiloQA: Generate multilingual span-level inconsistency detection data synthetically!
+[![Dataset on Hugging Face](https://img.shields.io/badge/Dataset-HuggingFace-blue.svg)](https://huggingface.co/datasets/s-nlp/PsiloQA)
 ![PsiloQA logo](images/logo.png)
+
+## About
+
+**PsiloQA** is the largest dataset for training and evaluating systems on **multilingual span-level hallucination detection with retrieved context**. 
+
+It offers:
+
+- 🧠 **An automated and scalable pipeline** for generating, annotating, and filtering data for hallucination detection tasks  
+- 🌍 **A large multilingual dataset** covering **14 languages** with high-quality, fine-grained span-level hallucination annotations for multiple open-source LLMs  
+- 📊 **Comprehensive empirical evaluations** of various state-of-the-art span-level hallucination detection methods across 14 languages  
+
+You can explore or download the dataset on Hugging Face:  
+👉 **[s-nlp/PsiloQA](https://huggingface.co/datasets/s-nlp/PsiloQA)**
+
+This repository contains the **full PsiloQA generation pipeline** — from sampling multilingual Wikipedia contexts to question–answer generation, LLM hypothesis production, annotation, and filtering.
 
 ## Installation
 Install uv:
@@ -67,4 +83,7 @@ The annotation process includes two filtering stages. Heuristic-based filters en
 ```bash
 uv run psilo dataset filter
 ```
+
+## Citation
+[TBD]
 
