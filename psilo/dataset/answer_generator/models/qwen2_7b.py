@@ -1,5 +1,6 @@
 from typing import Sequence
 
+# from dataset.answer_generator.runner import VLLMRunnerWithChatTemplate
 from dataset.answer_generator.runner import RunnerWithChatTemplate
 
 from ..registry import register
