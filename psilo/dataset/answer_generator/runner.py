@@ -173,4 +173,4 @@ class RunnerWithCustomTemplate(BaseRunner):
     def answer_one(self, question: str) -> GenerationResult:
         input = self._format(question)
         output = self._model.generate(**input, **self.generation_params)[0]
-        return GenerationResult(text=self._tokenizer.decode(output[0][input["input_ids"].shape[-1] :], skip_special_tokens=True).strip(), meta=self.generation_params)
+        return GenerationResult(text=self._tokenizer.decode(output[input["input_ids"].shape[-1] :], skip_special_tokens=True).strip(), meta=self.generation_params)
