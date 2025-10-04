@@ -30,7 +30,7 @@ It consists of five sequential stages:
 Each stage can be run individually, or you can execute the full pipeline with a single command:
 
 ```bash
-uv run psilo dataset pipeline --num-pages 10 --language ru --language en --limit 100
+uv run psilo dataset pipeline --num-pages 10 --language ru --language en --limit 100 --model Qwen/Qwen2.5-3B-Instruct
 ```
 
 All API keys and model settings are managed via the `.env` file (`QA_GENERATOR_`, `ANNOTATOR_`, and `FILTER_` prefixes).

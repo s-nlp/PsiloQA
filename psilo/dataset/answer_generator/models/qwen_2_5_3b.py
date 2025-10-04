@@ -9,7 +9,7 @@ from ..registry import register
 class Qwen25Runner(RunnerWithChatTemplate):
     @property
     def runner_id(self) -> str:
-        return "Qwen/Qwen2-7B-Instruct"
+        return "Qwen/Qwen2.5-3B-Instruct"
 
     @property
     def languages(self) -> Sequence[str]:
