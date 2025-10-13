@@ -85,5 +85,15 @@ uv run psilo dataset filter
 ```
 
 ## Citation
-[TBD]
+```
+@misc{rykov2025modelslielearnmultilingual,
+      title={When Models Lie, We Learn: Multilingual Span-Level Hallucination Detection with PsiloQA}, 
+      author={Elisei Rykov and Kseniia Petrushina and Maksim Savkin and Valerii Olisov and Artem Vazhentsev and Kseniia Titova and Alexander Panchenko and Vasily Konovalov and Julia Belikova},
+      year={2025},
+      eprint={2510.04849},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2510.04849}, 
+}
+```
 
