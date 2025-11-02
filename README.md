@@ -84,6 +84,12 @@ The annotation process includes two filtering stages. Heuristic-based filters en
 uv run psilo dataset filter
 ```
 
+### Uncertainty
+Use the following command to run uncertainty quantification methods:
+```bash
+uv run psilo methods uncertainty
+```
+
 ## Citation
 ```
 @misc{rykov2025modelslielearnmultilingual,
