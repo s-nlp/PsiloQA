@@ -1,9 +1,6 @@
-import os
 from typing import Sequence
 
 from dataset.answer_generator.runner import RunnerWithCustomTemplate
-from transformers import AutoModelForCausalLM, AutoTokenizer
-from utils.constants import DEVICE
 
 from ..registry import register
 
@@ -17,16 +14,9 @@ class LlamaFinnishRunner(RunnerWithCustomTemplate):
     def languages(self) -> Sequence[str]:
         return ["fi"]
 
-    def load(self) -> None:
-        if self._model is not None:
-            return
-        name = "Finnish-NLP/llama-7b-finnish-instruct-v0.2"
-        self._tokenizer = AutoTokenizer.from_pretrained(name, token=os.getenv("HF_TOKEN"))
-        self._model = AutoModelForCausalLM.from_pretrained(name, token=os.getenv("HF_TOKEN")).to(DEVICE)
-
     @property
-    def template(self) -> str:
-        return """<|alku|> Olet tekoälyavustaja. Seuraavaksi saat kysymyksen tai tehtävän. Kirjoita vastaus parhaasi mukaan siten että se täyttää kysymyksen tai tehtävän vaatimukset.\n<|ihminen|> Kysymys/Tehtävä:\n{}\n<|avustaja|> Vastauksesi:\n"""
+    def prompt_template(self) -> str:
+        return """<|alku|> Olet tekoälyavustaja. Seuraavaksi saat kysymyksen tai tehtävän. Kirjoita vastaus parhaasi mukaan siten että se täyttää kysymyksen tai tehtävän vaatimukset.\n<|ihminen|> Kysymys/Tehtävä:\n{}\n<|avustaja|> Vastauksesi:\n"""  # noqa: E501
 
     @property
     def generation_params(self) -> dict:
@@ -39,7 +29,6 @@ class LlamaFinnishRunner(RunnerWithCustomTemplate):
                 self._tokenizer.encode("\n")[-1],
             ],
             "pad_token_id": self._tokenizer.eos_token_id,
-            "do_sample": True,
         }
 
 

@@ -1,0 +1,40 @@
+Classify the following question into one of three categories:
+1. INCOMPLETE_QUESTION
+Incomplete questions that use pronouns with no clear antecedent (“Where is THIS located?” / “What is HE famous for?”).
+Questions that refer to a list/paragraph/excerpt that isn’t included in the question itself.
+
+2. SUBJECTIVE
+Questions whose answers require value judgments or a subjective opinion.
+
+3. NORMAL
+Any question with a clear subject (“Where is Jacksonville located?” / “Who is Alexander Montenegro?”).
+The subject may be ambiguous or polysemous, but it must not be impersonal.
+Open-world questions that name their subject (even if broad or multi-answer) are NORMAL.
+
+Instructions:
+Output only one of the three categories: INCOMPLETE_QUESTION, SUBJECTIVE, or NORMAL.
+
+Examples:
+INCOMPLETE_QUESTION
+Q: What were the set scores in the final match?
+A: INCOMPLETE_QUESTION
+Q: Which religious order was the abbey associated with?
+A: INCOMPLETE_QUESTION
+Q: What is the chemical formula of perrhenic acid as stated in the passage?
+A: INCOMPLETE_QUESTION
+
+SUBJECTIVE
+Q: What are some of the primary aims of the Athletics Club Lechia Gdańsk?
+A: SUBJECTIVE
+Q: What is the significance of the Fahey–Murray ministry in the context of New South Wales government history?
+A: SUBJECTIVE
+
+NORMAL
+Q: What was the population of Hazleton according to the 2020 census?
+A: NORMAL
+Q: What role did William Arrington hold in the Illinois State Senate between 1955 and 1973?
+A: NORMAL
+Q: Which Olympic Games did Lee Jun-ho represent South Korea in?
+A: NORMAL
+Q: How many league appearances did James Ryan make in the EFL?
+A: NORMAL

@@ -1,9 +1,6 @@
-import os
 from typing import Sequence
 
 from dataset.answer_generator.runner import RunnerWithCustomTemplate
-from transformers import AutoModelForCausalLM, AutoTokenizer
-from utils.constants import DEVICE
 
 from ..registry import register
 
@@ -17,12 +14,8 @@ class MistralHermesRunner(RunnerWithCustomTemplate):
     def languages(self) -> Sequence[str]:
         return ["en"]
 
-    def load(self) -> None:
-        self._tokenizer = AutoTokenizer.from_pretrained(self.runner_id, token=os.getenv("HF_TOKEN"))
-        self._model = AutoModelForCausalLM.from_pretrained(self.runner_id, token=os.getenv("HF_TOKEN")).to(DEVICE)
-
     @property
-    def template(self) -> str:
+    def prompt_template(self) -> str:
         return """<|im_start|>systemYou are a sentient, superintelligent artificial general intelligence, here to teach and assist me.<|im_end|><|im_start|>user{}<|im_start|>assistant\n"""
 
     @property

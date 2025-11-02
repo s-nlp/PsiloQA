@@ -5,21 +5,7 @@ from loguru import logger
 from tqdm.auto import tqdm
 from utils.id_generator import make_sample_id
 from utils.io import read_text
-
-
-async def call_openai_once_async(
-    client,
-    model: str,
-    system_prompt: str,
-    user_prompt: str,
-    temperature: float,
-) -> str:
-    resp = await client.chat.completions.create(
-        model=model,
-        messages=[{"role": "system", "content": system_prompt}, {"role": "user", "content": user_prompt}],
-        temperature=temperature,
-    )
-    return resp.choices[0].message.content or ""
+from utils.openai import call_openai_once_async
 
 
 def parse_model_output(raw: str) -> list[dict]:

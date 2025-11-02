@@ -15,7 +15,7 @@ class FalconRunner(RunnerWithCustomTemplate):
         return ["en"]
 
     @property
-    def template(self) -> str:
+    def prompt_template(self) -> str:
         return "Question: {}\nAnswer: "
 
 

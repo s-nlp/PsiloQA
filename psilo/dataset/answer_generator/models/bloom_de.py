@@ -15,7 +15,7 @@ class BloomDeRunner(RunnerWithCustomTemplate):
         return ["de"]
 
     @property
-    def template(self) -> str:
+    def prompt_template(self) -> str:
         return "{}\n"
 
     @property

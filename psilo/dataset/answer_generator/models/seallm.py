@@ -15,7 +15,7 @@ class SeaLLMRunner(RunnerWithCustomTemplate):
         return ["ar", "en", "vi", "id", "th", "ms", "km", "lo", "my", "tl"]
 
     @property
-    def template(self) -> str:
+    def prompt_template(self) -> str:
         return "{}\n"
 
     @property
