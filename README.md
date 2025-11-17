@@ -86,14 +86,31 @@ uv run psilo dataset filter
 
 ## Citation
 ```
-@misc{rykov2025modelslielearnmultilingual,
-      title={When Models Lie, We Learn: Multilingual Span-Level Hallucination Detection with PsiloQA}, 
-      author={Elisei Rykov and Kseniia Petrushina and Maksim Savkin and Valerii Olisov and Artem Vazhentsev and Kseniia Titova and Alexander Panchenko and Vasily Konovalov and Julia Belikova},
-      year={2025},
-      eprint={2510.04849},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2510.04849}, 
+@inproceedings{rykov-etal-2025-models,
+    title = "When Models Lie, We Learn: Multilingual Span-Level Hallucination Detection with {P}silo{QA}",
+    author = "Rykov, Elisei  and
+      Petrushina, Kseniia  and
+      Savkin, Maksim  and
+      Olisov, Valerii  and
+      Vazhentsev, Artem  and
+      Titova, Kseniia  and
+      Panchenko, Alexander  and
+      Konovalov, Vasily  and
+      Belikova, Julia",
+    editor = "Christodoulopoulos, Christos  and
+      Chakraborty, Tanmoy  and
+      Rose, Carolyn  and
+      Peng, Violet",
+    booktitle = "Findings of the Association for Computational Linguistics: EMNLP 2025",
+    month = nov,
+    year = "2025",
+    address = "Suzhou, China",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2025.findings-emnlp.626/",
+    doi = "10.18653/v1/2025.findings-emnlp.626",
+    pages = "11663--11682",
+    ISBN = "979-8-89176-335-7",
+    abstract = "Hallucination detection remains a fundamental challenge for the safe and reliable deployment of large language models (LLMs), especially in applications requiring factual accuracy. Existing hallucination benchmarks often operate at the sequence level and are limited to English, lacking the fine-grained, multilingual supervision needed for comprehensive evaluation. In this work, we introduce PsiloQA, a large-scale, multilingual dataset annotated with span-level hallucinations across 14 languages. PsiloQA is constructed through an automated three-stage pipeline: generating question{--}answer pairs from Wikipedia using GPT-4o, eliciting potentially hallucinated answers from diverse LLMs in a no-context setting, and automatically annotating hallucinated spans using GPT-4o by comparing against golden answers and retrieved context. We evaluate a wide range of hallucination detection methods-including uncertainty quantification, LLM-based tagging, and fine-tuned encoder models-and show that encoder-based models achieve the strongest performance across languages. Furthermore, PsiloQA demonstrates effective cross-lingual generalization and supports robust knowledge transfer to other benchmarks, all while being significantly more cost-efficient than human-annotated datasets. Our dataset and results advance the development of scalable, fine-grained hallucination detection in multilingual settings."
 }
 ```
 
