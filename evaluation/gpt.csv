@@ -1,0 +1,392 @@
+id,wiki_title,wiki_url,wiki_passage,llm_checkpoint,question,golden_answer,annotated_span
+psiloqa_TinyLlama/TinyLlama-1.1B-Chat-v1.0_2093,ArcView,https://en.wikipedia.org/wiki/ArcView,"ArcView, now referred to as ArcGIS for Desktop Basic, is the entry-level licensing level of ArcGIS Desktop, a geographic information system software product produced by Esri. It is intended by Esri to be the logical migration path from ArcView 3.x.",TinyLlama/TinyLlama-1.1B-Chat-v1.0,Which company produces ArcGIS for Desktop Basic?,Esri,The answer is Esri.
+psiloqa_microsoft/Phi-4-mini-instruct_19369,Primera Air,https://en.wikipedia.org/wiki/Primera%20Air,"Primera Air Scandinavia A/S, was a Danish airline owned by Primera Travel Group. It provided scheduled and charter passenger services from Northern Europe to more than 40 destinations in the Mediterranean, Middle East and North America. It ceased operations on 1 October 2018.
+The airline was originally founded in Iceland as JetX, before it was acquired by Primera Travel Group and renamed to Primera Air Scandinavia. In 2009/2010, operations were transferred to a newly founded Danish unit and the Icelandic air operator's certificate was subsequently cancelled. The airline also owned Primera Air Nordic, a Latvian subsidiary airline established in 2014.",microsoft/Phi-4-mini-instruct,Where was Primera Air Scandinavia originally founded and under what name?,It was originally founded in Iceland as JetX.,"Primera Air Scandinavia was originally founded in [HAL]Sweden[/HAL] under the name [HAL]""Primera Air Sweden""[/HAL] in [HAL]2006[/HAL]. It was established by the [HAL]Swedish airline SAS and later became part of the Norwegian airline SAS Group[/HAL]. The airline was initially a low-cost subsidiary of SAS, focusing on short-haul flights within Europe. It was later rebranded as [HAL]""Primera Air"" in 2010[/HAL], and in [HAL]2011[/HAL], it was sold to the [HAL]Norwegian airline group[/HAL], which then rebranded it as ""Primera Air Scandinavia."" The airline ceased operations in [HAL]2012[/HAL]."
+psiloqa_ServiceNow-AI/Apriel-5B-Instruct_5332,WorldService Project,https://en.wikipedia.org/wiki/WorldService%20Project,"WorldService Project is a British band founded and led by keyboard player, vocalist and composer Dave Morecroft. The group plays a combination of jazz, rock, punk and experimental styles and has toured extensively across Europe, Asia and America since its formation in 2009.",ServiceNow-AI/Apriel-5B-Instruct,Which styles of music does WorldService Project combine in their performances?,"Jazz, rock, punk and experimental styles","WorldService Project combines [HAL]various styles of music, including traditional folk, contemporary pop, and electronic music[/HAL], to create a unique fusion sound."
+psiloqa_TinyLlama/TinyLlama-1.1B-Chat-v1.0_2756,Ripper (video game),https://en.wikipedia.org/wiki/Ripper%20%28video%20game%29,"Ripper is a 1996 interactive movie point-and-click adventure game developed and published by Take-Two Interactive for MS-DOS and Macintosh. The cast includes Scott Cohen, Christopher Walken, Paul Giamatti, Karen Allen, Burgess Meredith, David Patrick Kelly, Ossie Davis, and John Rhys-Davies. It also uses the Blue Öyster Cult song ""(Don't Fear) The Reaper"". The villain of the game is chosen at random from the four main characters. A limited number of the clues and puzzles, plus a single line of dialogue in the ending, change according to the villain's identity.
+In 1996, home ports for the Saturn and PlayStation were announced, but these did not ship. Ripper is the second of the three Take-Two developed full-motion video-based adventure games, the other two being Hell: A Cyberpunk Thriller and Black Dahlia.",TinyLlama/TinyLlama-1.1B-Chat-v1.0,Which song by Blue Öyster Cult is used in the game Ripper?,(Don't Fear) The Reaper,"Yes, in the game Ripper, the song ""[HAL]Don't Fear the Reaper[/HAL]"" by Blue Öyster Cult is used. [HAL]The game is available on Steam, Xbox Game Pass, and other gaming platforms.[/HAL]"
+psiloqa_microsoft/Phi-4-mini-instruct_19058,Steve Thomas (ice hockey),https://en.wikipedia.org/wiki/Steve%20Thomas%20%28ice%20hockey%29,"Stephen Antony ""Stumpy"" Thomas (born July 15, 1963) is a British-born Canadian former ice hockey right winger who played 20 seasons in the National Hockey League (NHL) for the Toronto Maple Leafs, Chicago Blackhawks, New York Islanders, New Jersey Devils, Mighty Ducks of Anaheim and Detroit Red Wings.",microsoft/Phi-4-mini-instruct,Name all the NHL teams Stephen Antony Thomas played for.,"Toronto Maple Leafs, Chicago Blackhawks, New York Islanders, New Jersey Devils, Mighty Ducks of Anaheim, Detroit Red Wings","Stephen Antony Thomas, also known as [HAL]""The Great White One,""[/HAL] played for the following NHL teams:
+
+1. [HAL]Boston Bruins[/HAL]
+2. [HAL]New York Rangers[/HAL]
+3. Chicago Blackhawks
+4. Detroit Red Wings
+5. Toronto Maple Leafs
+6. [HAL]Montreal Canadiens[/HAL]
+7. [HAL]Philadelphia Flyers[/HAL]
+8. New York Islanders
+9. [HAL]Washington Capitals[/HAL]
+
+[HAL]Thomas had a distinguished career, playing for multiple teams across the league.[/HAL]"
+psiloqa_ServiceNow-AI/Apriel-5B-Instruct_7890,Mashhood Test Firing Range,https://en.wikipedia.org/wiki/Mashhood%20Test%20Firing%20Range,"Mashhood Test Firing Range (MTFR) at Tilla Jogian is a military testing area and firing range located approximately 25 kilometres (16 mi) west of Jhelum, Punjab, Pakistan. 
+It was used by the Khan Research Laboratories (KRL) as a primary testbed for initial phase of its Ghauri program and now serves as the primary weapon test site for the Pakistan Army.",ServiceNow-AI/Apriel-5B-Instruct,Where is the Mashhood Test Firing Range located?,"Tilla Jogian, approximately 25 kilometres west of Jhelum, Punjab, Pakistan.","The Mashhood Test Firing Range is located in [HAL]the Indian state of Rajasthan, specifically in the district of Alwar[/HAL]."
+psiloqa_tiiuae/falcon-7b-instruct_16567,School psychology,https://en.wikipedia.org/wiki/School%20psychology,"School psychology is a field that applies principles from educational psychology, developmental psychology, clinical psychology, community psychology, and behavior analysis to meet the learning and behavioral health needs of children and adolescents. It is an area of applied psychology practiced by a school psychologist. They often collaborate with educators, families, school leaders, community members, and other professionals to create safe and supportive school environments.
+They carry out psychological testing, psychoeducational assessment, intervention, prevention, counseling, and consultation in the ethical, legal, and administrative codes of their profession.",tiiuae/falcon-7b-instruct,What field of psychology applies principles to meet the needs of children and adolescents?,School psychology,[HAL]Clinical child and adolescent psychology[/HAL].
+psiloqa_HuggingFaceTB/SmolLM2-135M-Instruct_8746,EOC 4-inch 50 caliber,https://en.wikipedia.org/wiki/EOC%204-inch%2050%20caliber,The EOC 4-inch 50 caliber was a British naval gun designed by the Elswick Ordnance Company for export customers in the years before World War I that armed warships of the Republic of China and the Greek Navy.  These ships served in both World War I and later World War II.,HuggingFaceTB/SmolLM2-135M-Instruct,Which nations had warships armed with the EOC 4-inch 50 caliber naval gun?,Republic of China and Greece,"Based on the information provided, the nations that had warships armed with the EOC 4-inch 50 caliber naval gun are:
+
+[HAL]1. The United States (19th century)
+2. The United Kingdom (19th century)
+3. The United Kingdom (19th century)
+4. The United Kingdom (19th century)
+5. The United Kingdom (19th century)
+6. The United Kingdom (19th century)
+7. The United Kingdom (19th century)
+8. The United Kingdom (19th century)
+9. The United Kingdom (19th century)
+10. The United Kingdom (19th century)[/HAL]
+
+These are the nations that had warships armed with the EOC 4-inch 50 caliber naval gun."
+psiloqa_microsoft/Phi-4-mini-instruct_20174,Cricket at the 2017 SEA Games,https://en.wikipedia.org/wiki/Cricket%20at%20the%202017%20SEA%20Games,"The cricket competitions at the 2017 SEA Games in Kuala Lumpur took place at Kinrara Oval in Selangor.
+The 2017 Games featured competitions in three events (men 2 events and women 1 events).",microsoft/Phi-4-mini-instruct,"In the 2017 SEA Games, what was the total number of cricket events included for both men and women?",3 events,"The 2017 Southeast Asian Games (SEA Games) included a total of [HAL]4[/HAL] cricket events for both men and women. These events were:
+
+1. Men's team event
+2. [HAL]Women's team event[/HAL]
+3. [HAL]Men's singles event[/HAL]
+4. [HAL]Women's singles event[/HAL]
+
+So, there were [HAL]4[/HAL] cricket events in total."
+psiloqa_ServiceNow-AI/Apriel-5B-Instruct_7114,"Interstate 27 Business (Plainview, Texas)",https://en.wikipedia.org/wiki/Interstate%2027%20Business%20%28Plainview%2C%20Texas%29,"Business Interstate 27-U (Bus. I-27-U) is a business loop in the US state of Texas. It stretches 9.282 miles (14.938 km) along Columbia Street through Plainview between exits 45 and 53 on Interstate 27 (I-27). The highway follows the original alignment of U.S. Route 87 (US 87) prior to the construction of the new freeway to the west. Before becoming Bus. I-27-U, it was designated as Loop 445 and signed as a business route of US 87. Along the way, it intersects Farm to Market Road 3466 (FM 3466, South 4th Street), US 70 (5th Street), and FM 1767 (34th Street).",ServiceNow-AI/Apriel-5B-Instruct,Which roads does Business Interstate 27-U intersect along its route?,"FM 3466 (South 4th Street), US 70 (5th Street), and FM 1767 (34th Street)","Business Interstate 27-U intersects with [HAL]US Highway 82, US Highway 279, and FM 1614[/HAL] in its route."
+psiloqa_HuggingFaceTB/SmolLM2-135M-Instruct_8922,Caitlin Moran,https://en.wikipedia.org/wiki/Caitlin%20Moran,"Catherine Elizabeth Moran ( KAT-lin mə-RAN; born 5 April 1975) is an English journalist, broadcaster, and author at The Times, where she writes two columns a week: one for the Saturday Magazine, and the satirical Friday column ""Celebrity Watch"".
+Moran was named British Press Awards (BPA) Columnist of the Year for 2010, and both BPA Critic of the Year 2011 and Interviewer of the Year 2011. In 2012, she was named Columnist of the Year by the London Press Club, and Culture Commentator at the Comment Awards in 2013.",HuggingFaceTB/SmolLM2-135M-Instruct,When was Catherine Elizabeth Moran born?,5 April 1975,"Catherine Elizabeth Moran was born on [HAL]July 26, 1925, in New York City, New York[/HAL]."
+psiloqa_ServiceNow-AI/Apriel-5B-Instruct_7429,Heterangaeus,https://en.wikipedia.org/wiki/Heterangaeus,"Heterangaeus is a genus of hairy-eyed craneflies (family Pediciidae) from the Russian far east (Sakhalin & Kuril Islands), North Korea and Japan.",ServiceNow-AI/Apriel-5B-Instruct,In which regions are species of the genus Heterangaeus naturally found?,"Species of the genus Heterangaeus are naturally found in the Russian far east, specifically in Sakhalin and the Kuril Islands, as well as in North Korea and Japan.","Species of the genus Heterangaeus are found in the [HAL]tropical regions of Asia, including India, Sri Lanka, and Southeast Asia[/HAL]."
+psiloqa_HuggingFaceH4/zephyr-7b-beta_11470,1987 Hamilton Tiger-Cats season,https://en.wikipedia.org/wiki/1987%20Hamilton%20Tiger-Cats%20season,The 1987 Hamilton Tiger-Cats season was the 30th season for the team in the Canadian Football League and their 38th overall. The Tiger-Cats finished in third place in the East Division with a 7–11 record and lost the East Semi-Final to the Toronto Argonauts. Steve Stapler set a franchise record (broken in 1989) for most touchdowns in one season with 13.,HuggingFaceH4/zephyr-7b-beta,Which team defeated the Hamilton Tiger-Cats in the East Semi-Final?,Toronto Argonauts,"The [HAL]Saskatchewan Roughriders[/HAL] defeated the Hamilton Tiger-Cats in [HAL]the East Semi-Final during the 2021 CFL playoffs. The game took place on November 21, 2021, in Regina, Saskatchewan, with the Roughriders emerging as 23-17 winners[/HAL]."
+psiloqa_microsoft/Phi-4-mini-instruct_17997,Stephen D. Sullivan,https://en.wikipedia.org/wiki/Stephen%20D.%20Sullivan,"Stephen D. Sullivan is an American author and artist. He is a prolific author, having written more than twenty-five books.",microsoft/Phi-4-mini-instruct,What nationality is Stephen D. Sullivan?,Stephen D. Sullivan is an American author.,"Stephen D. Sullivan is an American [HAL]author, journalist, and former television news anchor. He was born in New York City and has been a prominent figure in American journalism[/HAL]."
+psiloqa_ServiceNow-AI/Apriel-5B-Instruct_3690,1975 Ålandic legislative election,https://en.wikipedia.org/wiki/1975%20%C3%85landic%20legislative%20election,"Legislative elections were held in Åland on 20 October 1975 to elect members of the Landstinget. The 30 members were elected for a four-year term by proportional representation.
+There were apparentments between Åland Social Democrats and ÅSU; Liberals, Freeminded Co-operation and Samlad Åländsk Ungdom; and between FS–framsteg and Åländska Förbundet.
+After the election, LoS-liberalerna and Liberals formed Liberals for Åland in 1978, while FS–framsteg merged with LoS and Åländska Förbundet to form Åland Centre in 1976.",ServiceNow-AI/Apriel-5B-Instruct,When were the legislative elections held in Åland to elect members of the Landstinget?,The legislative elections were held on 20 October 1975 to elect members of the Landstinget in Åland.,The legislative elections in Åland were held on [HAL]17 March 2015[/HAL] to elect members of the Landstinget.
+psiloqa_HuggingFaceTB/SmolLM2-360M-Instruct_10498,Susskind–Glogower operator,https://en.wikipedia.org/wiki/Susskind%E2%80%93Glogower%20operator,"The Susskind–Glogower operator, first proposed by Leonard Susskind and Jonathan Glogower, refers to the operator where the phase is introduced as an approximate polar decomposition of the creation and annihilation operators.
+It is defined as
+
+  
+    
+      
+        V
+        =
+        
+          
+            1
+            
+              a
+              
+                a
+                
+                  †
+                
+              
+            
+          
+        
+        a
+      
+    
+    {\displaystyle V={\frac {1}{\sqrt {aa^{\dagger }}}}a}
+  
+,
+and its adjoint
+
+  
+    
+      
+        
+          V
+          
+            †
+          
+        
+        =
+        
+          a
+          
+            †
+          
+        
+        
+          
+            1
+            
+              a
+              
+                a
+                
+                  †
+                
+              
+            
+          
+        
+      
+    
+    {\displaystyle V^{\dagger }=a^{\dagger }{\frac {1}{\sqrt {aa^{\dagger }}}}}
+  
+.
+Their commutation relation is
+
+  
+    
+      
+        [
+        V
+        ,
+        
+          V
+          
+            †
+          
+        
+        ]
+        =
+        
+          |
+        
+        0
+        ⟩
+        ⟨
+        0
+        
+          |
+        
+      
+    
+    {\displaystyle [V,V^{\dagger }]=|0\rangle \langle 0|}
+  
+,
+where  
+  
+    
+      
+        
+          |
+        
+        0
+        ⟩
+      
+    
+    {\displaystyle |0\rangle }
+  
+ is the vacuum state of the harmonic oscillator.
+They may be regarded as a (exponential of) phase operator because
+
+  
+    
+      
+        V
+        
+          a
+          
+            †
+          
+        
+        a
+        
+          V
+          
+            †
+          
+        
+        =
+        
+          a
+          
+            †
+          
+        
+        a
+        +
+        1
+      
+    
+    {\displaystyle Va^{\dagger }aV^{\dagger }=a^{\dagger }a+1}
+  
+,
+where 
+  
+    
+      
+        
+          a
+          
+            †
+          
+        
+        a
+      
+    
+    {\displaystyle a^{\dagger }a}
+  
+ is the number operator. So the exponential of the phase operator displaces the number operator in the same fashion as the momentum operator acts as the generator of translations in quantum mechanics: 
+
+  
+    
+      
+        exp
+        ⁡
+        
+          (
+          
+            i
+            
+              
+                
+                  
+                    
+                      
+                        p
+                        ^
+                      
+                    
+                  
+                  
+                    x
+                    
+                      o
+                    
+                  
+                
+                ℏ
+              
+            
+          
+          )
+        
+        
+          
+            
+              x
+              ^
+            
+          
+        
+        exp
+        ⁡
+        
+          (
+          
+            −
+            i
+            
+              
+                
+                  
+                    
+                      
+                        p
+                        ^
+                      
+                    
+                  
+                  
+                    x
+                    
+                      o
+                    
+                  
+                
+                ℏ
+              
+            
+          
+          )
+        
+        =
+        
+          
+            
+              x
+              ^
+            
+          
+        
+        +
+        
+          x
+          
+            0
+          
+        
+      
+    
+    {\displaystyle \exp \left(i{\frac {{\hat {p}}x_{o}}{\hbar }}\right){\hat {x}}\exp \left(-i{\frac {{\hat {p}}x_{o}}{\hbar }}\right)={\hat {x}}+x_{0}}
+  
+.
+They may be used to solve problems such as atom-field interactions, level-crossings   or to define some class of non-linear coherent states, among others.
+
+
+== References ==",HuggingFaceTB/SmolLM2-360M-Instruct,Who first proposed the operator that involves the approximate polar decomposition of the creation and annihilation operators?,Leonard Susskind and Jonathan Glogower,"The operator that involves the approximate polar decomposition of the creation and annihilation operators is the [HAL]""Hermitian-Hadamard""[/HAL] operator."
+psiloqa_microsoft/Phi-4-mini-instruct_20415,List of Interstate Highways in Idaho,https://en.wikipedia.org/wiki/List%20of%20Interstate%20Highways%20in%20Idaho,The Interstate Highways in Idaho are the segments of the Dwight D. Eisenhower National System of Interstate and Defense Highways owned and maintained by the Idaho Transportation Department (ITD) in the U.S. state of Idaho. The state has five Interstate Highways that total approximately 611 miles (983 km) in length.,microsoft/Phi-4-mini-instruct,Who owns and maintains the Interstate Highways in Idaho?,The Interstate Highways in Idaho are owned and maintained by the Idaho Transportation Department (ITD).,"In Idaho, the ownership and maintenance of Interstate Highways are managed by the Idaho Transportation Department (ITD). The ITD is responsible for the construction, maintenance, and operation of the state's highway system, including the Interstate Highways. [HAL]The federal government, through the Federal Highway Administration (FHWA), provides funding and oversight, but the day-to-day operations and maintenance are handled by the Idaho Transportation Department.[/HAL]"
+psiloqa_utter-project/EuroLLM-9B-Instruct_23732,Something to Believe In (Curtis Mayfield album),https://en.wikipedia.org/wiki/Something%20to%20Believe%20In%20%28Curtis%20Mayfield%20album%29,"Something to Believe In is a studio album by the American musician Curtis Mayfield, released in 1980. It peaked at No. 128 on the Billboard 200. The cover art is by Ernie Barnes.",utter-project/EuroLLM-9B-Instruct,At what position did 'Something to Believe In' peak on the Billboard 200?,No. 128,"The [HAL]song 'Something to Believe In' by American R&B singer-songwriter Beyoncé reached its peak position of number 70 on the Billboard 200 chart, based on digital sales data only, on April 22, 2011[/HAL]."
+psiloqa_HuggingFaceTB/SmolLM2-135M-Instruct_8962,Rocca dei Rettori,https://en.wikipedia.org/wiki/Rocca%20dei%20Rettori,"Rocca dei Rettori (also known as Castle of Manfredi) is a castle in Benevento, southern Italy. It currently houses the Museum of the Samnium.",HuggingFaceTB/SmolLM2-135M-Instruct,"By what alternative name is Rocca dei Rettori also known, and what is its current function?","Rocca dei Rettori is also known as the Castle of Manfredi. In its present-day incarnation, rather than serving solely as a fortification, it has been repurposed to host the Museum of the Samnium, thereby bridging its historical significance with contemporary cultural preservation.","Rocca dei Rettori [HAL]is a fictional character from the 1980s Italian film ""La Dolce Vita"" directed by Stefano Bianchi. The character is a young woman who is a prostitute and a member of the Italian underworld. She is known for her cunning and cunninging abilities, and her role in the film is to play the role of a prostitute.
+
+Rocca dei Rettori is often referred to as ""Rocca"" in Italian, and her name is also used in Italian language translations of the film. She is also known as ""Rocca dei Rettori"" in Italian, and her name is also used in Italian language translations of the film.
+
+In the film, Rocca dei Rettori is a member of the Italian underworld, and she is known for her cunning and cunninging abilities. She is often referred to as ""Rocca"" in Italian, and her name is also used in Italian language translations of the film.[/HAL]"
+psiloqa_HuggingFaceH4/zephyr-7b-beta_12000,Thomas of Cana,https://en.wikipedia.org/wiki/Thomas%20of%20Cana,"Thomas of Cana (Malayalam: K'nāi Thoma or Tomman Kinān, Syriac: K'nānāya Thoma) was a Syriac Christian merchant magnate who arrived to the Chera Dynasties capital city of Kodungallur between 345 A.D. and 811 A.D. Thoma brought with him Jewish-Christian families (early East Syriac Christian merchants) and clergymen from Persian Mesopotamia.
+Thoma received copper-plates of socio-economic rights known today as the Thomas of Cana copper plates. The descendants of Thoma and the migrants who arrived with him are known as the Knanaya or Tekkumbhagar (Southist) Christians, found among the Saint Thomas Christian community of Kerala, India. Scholars associate Thoma's migration with connecting the Church of Saint Thomas in India with the East Syriac liturgical tradition of the Persian Church of the East. 
+Portuguese sources of the 17th century note that due to Thoma's deeds as a Christian merchant, the native Nasrani of Kerala venerated him as a saint. Thoma was officially canonized by the patriarch of the Syriac Orthodox Church, Ignatius Zakka I, in March 1990.",HuggingFaceH4/zephyr-7b-beta,Who canonized Thomas of Cana in 1990?,Ignatius Zakka I,"Pope John Paul II canonized Thomas of Cana, [HAL]also known as Thomas the Spaniard,[/HAL] on [HAL]May 28,[/HAL] 1990, in [HAL]St. Peter's Square at the Vatican[/HAL]."
+psiloqa_utter-project/EuroLLM-9B-Instruct_25907,Robert Nadeau (aikidoka),https://en.wikipedia.org/wiki/Robert%20Nadeau%20%28aikidoka%29,"Robert Nadeau  (born March 10, 1937) is an American aikido teacher holding the rank of 8th dan and master teacher(Shihan) in the Aikikai. He is well known as a pioneer in the energy and awareness aspects of aikido, having dedicated his life's work to understanding and translating these principles handed down by Ueshiba into fields beyond aikido, including psychotherapy, personal development.
+Nadeau began training in martial arts at the age of 16 and began studying Aikido with American instructor Robert Tan. After Training in Japan with the founder of Aikido, Morihei Ueshiba, from 1962-1964 Nadeau returned to Northern California and opened a series of martial art schools sharing space with first Professor Sig Kuferat and later Richard Bunch through whom he has had on-going contact with several notable Ju-Jitsu schools and which eventually led to the formation of the California Aikido Association. He is one of three division heads of the California Aikido Association and is also the founder and head instructor of City Aikido of San Francisco, Aikido of San Jose, and Aikido of Mountain View, CA. Nadeau has taught workshops in the United States, Switzerland, Israel and New Zealand.",utter-project/EuroLLM-9B-Instruct,"What rank does Robert Nadeau hold in Aikido, and what is his role as a master teacher?","Robert Nadeau holds the rank of 8th dan in Aikido and is a master teacher (Shihan) in the Aikikai. He is well known for pioneering the energy and awareness aspects of aikido, which he has translated into fields beyond aikido, including psychotherapy and personal development.","Robert Nadeau holds the rank of 8th dan in Aikido, which is a high-ranking title representing a significant mastery of this martial art. As a [HAL]master teacher[/HAL], he plays a crucial role in [HAL]passing on the teachings and techniques of Aikido to others, inspiring and guiding them in their practice. This demonstrates his dedication to the art and the commitment to ensure its principles and ethics are upheld[/HAL]."
+psiloqa_togethercomputer/Pythia-Chat-Base-7B-v0.16_14275,2018 Chinese FA Women's Cup,https://en.wikipedia.org/wiki/2018%20Chinese%20FA%20Women%27s%20Cup,The 2018 Chinese FA Women's Cup (Chinese: 2018年中国足球协会杯(女子)) was the 12th edition of the Chinese FA Women's Cup.,togethercomputer/Pythia-Chat-Base-7B-v0.16,What year was the 2018 Chinese FA Women's Cup held?,2018,"The 2018 Chinese FA Women's Cup was the [HAL]7th[/HAL] edition of the Chinese FA Women's Cup, the top-tier football league for women in China."
+psiloqa_TinyLlama/TinyLlama-1.1B-Chat-v1.0_1164,"Ozanlı, Şahinbey",https://en.wikipedia.org/wiki/Ozanl%C4%B1%2C%20%C5%9Eahinbey,"Ozanlı, historically Pevirge, is a neighbourhood in the municipality and district of Şahinbey, Gaziantep Province, Turkey. Its population is 134 (2022).
+
+
+== References ==",TinyLlama/TinyLlama-1.1B-Chat-v1.0,"What is the population of Ozanlı as of 2022, and in which province is it situated?","As of 2022, the population of Ozanlı is 134. It is situated in Gaziantep Province, Turkey.","As of 2022, the population of Ozanlı is [HAL]2,034[/HAL]. It is situated in the [HAL]Çanakkale[/HAL] Province of Turkey."
+psiloqa_tiiuae/falcon-7b-instruct_16243,Said Naum,https://en.wikipedia.org/wiki/Said%20Naum,"Sa'id bin Salim Na'um Basalamah (Arabic: سعيد بن سالم نعوم با سلمه, romanized: Sa'īd bin Sālim Na'ūm Bā Salamah) or better known as Said Naum (Arabic: سعيد نعوم, romanized: Sa'īd Na'ūm; Arabic pronunciation: [Saʕiːd bin Saːlim Naʕuwm Baːsalamah]) was the first Kapitan Arab in Batavia and a Muslim philanthropist in Dutch East Indies in the 19th century. He is known for his  charities and endowment of large lands to be used as school and cemetery currently located in Tanah Abang.",tiiuae/falcon-7b-instruct,What role did Said Naum have in the Dutch East Indies?,He was a Muslim philanthropist.,Said Naum was a [HAL]Muslim leader[/HAL] in the Dutch East Indies during the [HAL]18th[/HAL] century. He was known for his [HAL]resistance against Dutch colonialism[/HAL] and his [HAL]efforts to establish an Islamic state in the region[/HAL].
+psiloqa_utter-project/EuroLLM-9B-Instruct_26431,Tough Love & Parables,https://en.wikipedia.org/wiki/Tough%20Love%20%26%20Parables,"Tough Love & Parables is Bizzle's first Christian hip hop album released on his own label, God Over Money. It debuted at No. 15 on the Billboard Gospel Albums chart.",utter-project/EuroLLM-9B-Instruct,Where did Bizzle's album 'Tough Love & Parables' rank when it debuted on the Billboard Gospel Albums chart?,No. 15,Bizzle's album 'Tough Love & Parables' debuted at [HAL]number two[/HAL] on the Billboard Gospel Albums chart.
+psiloqa_ServiceNow-AI/Apriel-5B-Instruct_8117,"Dry Dock Complex (Detroit, Michigan)",https://en.wikipedia.org/wiki/Dry%20Dock%20Complex%20%28Detroit%2C%20Michigan%29,"The Dry Dock Complex consists of six interconnected buildings located at 1801–1803 Atwater Street in Detroit, Michigan, as well as the remains of a nearby dry dock at 1900 Atwater Street.  The 1801-1803 Atwater complex is also known as the Globe Trading Company Building, and in 2015 was opened by the Michigan Department of Natural Resources as the Outdoor Adventure Center. 
+The complex is significant as a historic maritime manufacturing facility.  The earliest structure, an 1892 machine shop, is also significant as an early example of an industrial building entirely supported by its steel frame, but using traditional brick and standard windows to infill the curtain walls.  The complex was listed on the National Register of Historic Places in 2009. In 2012, the Department of Natural Resources received funding for historic redevelopment of the complex, along the city's east riverfront promenade.",ServiceNow-AI/Apriel-5B-Instruct,Which organization received funding for the historic redevelopment of the Dry Dock Complex in 2012?,Department of Natural Resources,"The organization that received funding for the historic redevelopment of the Dry Dock Complex in 2012 was the [HAL]City of Portland, Oregon[/HAL]."
+psiloqa_TinyLlama/TinyLlama-1.1B-Chat-v1.0_2708,Acraspis,https://en.wikipedia.org/wiki/Acraspis,"Acraspis is a genus of gall wasps in the family Cynipidae. The following species are recognised in the genus Acraspis:
+
+Acraspis alaria
+Acraspis echini
+Acraspis erinacei - hedgehog gall wasp
+Acraspis gemula
+Acraspis longicornis
+Acraspis quercushirta - jewel oak gall wasp
+Acraspis pezomachoides - oak pea gall wasp
+Acraspis prinoides
+Acraspis villosa 
+
+
+== References ==",TinyLlama/TinyLlama-1.1B-Chat-v1.0,Which species of Acraspis is also known as the jewel oak gall wasp?,Acraspis quercushirta,"Yes, the species of Acraspis that is also known as the jewel oak gall wasp is Acraspis [HAL]cerasi[/HAL]."
+psiloqa_HuggingFaceTB/SmolLM2-360M-Instruct_10960,Myrcia crebra,https://en.wikipedia.org/wiki/Myrcia%20crebra,"Myrcia crebra is a species of plant in the family Myrtaceae. It is found from in South America from Venezuela to northern Peru and eastern Bolivia and Brazil.
+
+
+== References ==",HuggingFaceTB/SmolLM2-360M-Instruct,Which family does Myrcia crebra belong to?,Myrtaceae.,Myrcia crebra belongs to the family [HAL]Myricaceae[/HAL].
+psiloqa_ServiceNow-AI/Apriel-5B-Instruct_3262,Haematoxylum campechianum,https://en.wikipedia.org/wiki/Haematoxylum%20campechianum,"Haematoxylum campechianum (blackwood, bloodwood tree, bluewood, campeachy tree, campeachy wood, campeche logwood, campeche wood, Jamaica wood, logwood or logwood tree) is a species of flowering tree in the legume family, Fabaceae, that is native to southern Mexico, and introduced to the Caribbean, northern Central America, and other localities around the world. 
+The tree was of great economic importance from the 17th century to the 19th century, when it was commonly logged and exported to Europe for use in dyeing fabrics. The modern nation of Belize developed from 17th- and 18th-century logging camps established by the English. The tree's scientific name means ""bloodwood"" (haima being Greek for blood and xylon for wood).",ServiceNow-AI/Apriel-5B-Instruct,During which centuries was the Haematoxylum campechianum tree of great economic importance?,17th century to 19th century,"The Haematoxylum campechianum tree, also known as the Campeche logwood tree, was of great economic importance during the [HAL]16th[/HAL] to 19th centuries, particularly for its use in dye production."
+psiloqa_TinyLlama/TinyLlama-1.1B-Chat-v1.0_434,1981 European Athletics Indoor Championships – Women's shot put,https://en.wikipedia.org/wiki/1981%20European%20Athletics%20Indoor%20Championships%20%E2%80%93%20Women%27s%20shot%20put,The women's shot put event  at the 1981 European Athletics Indoor Championships was held on 21 February.,TinyLlama/TinyLlama-1.1B-Chat-v1.0,Which event was featured in the women's category at the 1981 European Athletics Indoor Championships?,The event featured in the women's category at the 1981 European Athletics Indoor Championships was the shot put.,The women's [HAL]60 meters[/HAL] event was featured in the women's category at the 1981 European Athletics Indoor Championships.
+psiloqa_togethercomputer/Pythia-Chat-Base-7B-v0.16_13703,Waverley Oakleigh Panthers,https://en.wikipedia.org/wiki/Waverley%20Oakleigh%20Panthers,"Waverley Oakleigh Panthers Rugby League Football Club is an Australian rugby league football club based in Clayton, Victoria, that currently plays in the Melbourne Rugby League competition under the NRL Victoria. Founded in 1976 by a group of mutual friends and players with a common passion for the game, it is currently the oldest rugby league club in Victoria. The club currently fields teams in the majority of age groups from Under 6s through to seniors, and also Girls' Tag teams. Home games are played at Fregon Reserve in Clayton, Victoria.",togethercomputer/Pythia-Chat-Base-7B-v0.16,What is the home ground of the Waverley Oakleigh Panthers Rugby League Football Club?,"Fregon Reserve in Clayton, Victoria","The home ground of the Waverley Oakleigh Panthers Rugby League Football Club is the [HAL]Waverley Oval in the suburb of Oakleigh[/HAL], Victoria."
+psiloqa_HuggingFaceH4/zephyr-7b-beta_11644,Menna Gallie,https://en.wikipedia.org/wiki/Menna%20Gallie,"Menna Patricia Humphreys Gallie (18 March 1919 – 17 June 1990) was a Welsh novelist and translator. She is best known for her novels in the English language, and as the translator of Caradog Prichard's Un Nos Ola Leuad, under the title Full Moon.",HuggingFaceH4/zephyr-7b-beta,In which language did Menna Patricia Humphreys Gallie primarily write her novels?,English,"Menna Patricia Humphreys Gallie primarily wrote her novels in English. She was a Welsh writer, but her works were published in English [HAL]and have been translated into other languages such as French and German. Some of her well-known novels include ""The Sleep of Glass"" and ""Visitors and Visions.""[/HAL]"
+psiloqa_HuggingFaceTB/SmolLM2-360M-Instruct_10832,Bass violin,https://en.wikipedia.org/wiki/Bass%20violin,"Bass violin is the modern term for various 16th- and 17th-century bass instruments of the violin (i.e. viola da braccio) family. They were the direct ancestor of the modern cello. Bass violins were usually somewhat larger than the modern cello, but tuned to the same nominal pitches or sometimes one step lower. Contemporaneous names for these instruments include ""basso de viola da braccio,"" ""basso da braccio,"" or the generic term ""violone,"" which simply meant ""large fiddle."" The instrument differed from the violone of the viol, or ""viola da gamba"" family in that like the other violins it had at first three, and later usually four strings, as opposed to five, six, or seven strings, it was tuned in fifths, and it had no frets. With its F-holes and stylized C-bouts it also more closely resembled the viola da braccio.
+The name ""bass violin"" is also sometimes used for the double bass.
+Occasionally, historians have used the term ""bass violin"" to refer to other various instruments of the violin family that were larger than the alto violin or viola, such as the tenor violin.  This use can be synonymous with ""harmony violin.""
+After the 1950s, the term ""bass violin"" sometimes referred to a bass instrument of the violin octet.",HuggingFaceTB/SmolLM2-360M-Instruct,How did bass violins differ from violones of the viol family in terms of strings and tuning?,They had three or four strings tuned in fifths and no frets.,Bass violins were [HAL]smaller[/HAL] and had [HAL]a lower pitch than violones of the viol family. They had a lower pitch due to the smaller size of the strings and the tuning pegs[/HAL].
+psiloqa_TinyLlama/TinyLlama-1.1B-Chat-v1.0_2392,Glyphodes extorris,https://en.wikipedia.org/wiki/Glyphodes%20extorris,"Glyphodes extorris is a moth in the family Crambidae. It was described by Paul Dognin in 1905. It is found in Peru and Colombia.
+
+
+== References ==",TinyLlama/TinyLlama-1.1B-Chat-v1.0,What family does the moth Glyphodes extorris belong to?,Glyphodes extorris belongs to the family Crambidae.,The moth Glyphodes extorris belongs to the family [HAL]Glyphodidae[/HAL].
+psiloqa_ServiceNow-AI/Apriel-5B-Instruct_3380,Mink frog,https://en.wikipedia.org/wiki/Mink%20frog,"The mink frog (Lithobates septentrionalis) is a small species of frog native to the United States and Canada. They are so named for their scent, which reportedly smells like a mink. The scent is more akin to that of rotting onions to those unfamiliar with mink. It is also sometimes referred to as the north frog.",ServiceNow-AI/Apriel-5B-Instruct,What alternative name is sometimes used for the mink frog?,North frog,The alternative name for the mink frog is the [HAL]northern mink frog[/HAL].
+psiloqa_HuggingFaceTB/SmolLM2-360M-Instruct_10546,Francisco Pérez (athlete),https://en.wikipedia.org/wiki/Francisco%20P%C3%A9rez%20%28athlete%29,"Francisco Pérez is a paralympic athlete from Spain competing mainly in category T11 distance running events.
+Francisco competed in the 1996 Summer Paralympics in Atlanta. He finished fourth in the 10,000m and won a bronze medal in the marathon.",HuggingFaceTB/SmolLM2-360M-Instruct,Which medal did Francisco Pérez win in the marathon at the 1996 Summer Paralympics?,Francisco Pérez achieved a bronze medal in the marathon during the 1996 Summer Paralympics held in Atlanta. This accomplishment highlights his competitive performance in distance running events despite the challenges associated with his visual impairment category.,"In the 1996 Summer Paralympics, Francisco Pérez won the [HAL]gold[/HAL] medal in the [HAL]1000 meters[/HAL]."
+psiloqa_HuggingFaceTB/SmolLM2-135M-Instruct_8779,Minuscule 1210,https://en.wikipedia.org/wiki/Minuscule%201210,Minuscule 1210 is a Greek minuscule manuscript of the New Testament. It does not contain the Pericope Adulterae.,HuggingFaceTB/SmolLM2-135M-Instruct,Which section is missing from Minuscule 1210?,The Pericope Adulterae.,"Minuscule 1210 is [HAL]missing from the section ""The Great Gatsby"" in the ""The Great Gatsby"" series[/HAL]."
+psiloqa_HuggingFaceH4/zephyr-7b-beta_12047,Venray sheep companies,https://en.wikipedia.org/wiki/Venray%20sheep%20companies,The Venray sheep companies were a group of Dutch livestock merchant companies who dominated the European trade in sheep in the 19th century.,HuggingFaceH4/zephyr-7b-beta,In which century did the Venray sheep companies dominate the European sheep trade?,19th century,"The Venray sheep companies dominated the European sheep trade in the 19th century. [HAL]The Venray region in the Netherlands was known for its high-quality sheep breeds, and the companies that emerged in the area became major players in the European sheep market during the 19th century. The trade reached its peak in the mid-19th century, with Venray sheep being exported to countries such as Germany, France, and Belgium.[/HAL]"
+psiloqa_tiiuae/falcon-7b-instruct_15311,Nickelodeon (Japanese TV channel),https://en.wikipedia.org/wiki/Nickelodeon%20%28Japanese%20TV%20channel%29,"Nickelodeon was a Japanese television channel which was targeted mainly at children, teens and adults, operated by ViacomCBS Networks Japan K.K. (a subsidiary of ViacomCBS Networks EMEAA division of the eponymous 
+television channel in the United States ViacomCBS). It originally launched in November 1998 as a cable and satellite television channel, but due to declining viewership, the television channel was taken off the air on September 30, 2009. The channel was revived for OTT media services from January 30, 2018 to January 31, 2022.",tiiuae/falcon-7b-instruct,What was the reason for Nickelodeon being taken off the air?,Declining viewership,"Nickelodeon was taken off the air in [HAL]2019[/HAL] due to [HAL]the rise of streaming services and [/HAL]the decline in [HAL]cable TV subscriptions. The network was also facing a number of allegations of inappropriate behavior and misconduct by its employees, which led to the cancellation of several shows[/HAL]."
+psiloqa_togethercomputer/Pythia-Chat-Base-7B-v0.16_12541,Club América Premier,https://en.wikipedia.org/wiki/Club%20Am%C3%A9rica%20Premier,"Club de Fútbol América S.A. de C.V. Premier is a professional football team that plays in the Mexican Football League. They are currently playing in the Liga Premier (Mexico's Third Division). Club América Premier is affiliated with Club América who plays in the Liga MX, both play in Mexico's capital, Mexico City.",togethercomputer/Pythia-Chat-Base-7B-v0.16,What is the name of the professional football team that plays in Mexico's Third Division?,Club de Fútbol América S.A. de C.V. Premier,The team is called [HAL]Club Deportivo Tecos UAG[/HAL].
+psiloqa_microsoft/Phi-4-mini-instruct_17977,Guder,https://en.wikipedia.org/wiki/Guder,"Guder is a town located in the West Shewa Zone of the Oromia of Ethiopia. Located 12km west of Ambo, this town has a latitude and longitude of 8°58′N 37°46′E, with an elevation of 2101 meters above sea level. Guder is famous for its Guder River Falls and year-round fruit production, using plentiful water resources in the vicinity.",microsoft/Phi-4-mini-instruct,What is the elevation of Guder above sea level?,2101 meters,"Guder is a small village in the district of Vulkaneifel in Rhineland-Palatinate, Germany. The elevation of Guder is [HAL]approximately 500 meters (1,640 feet)[/HAL] above sea level."
+psiloqa_ServiceNow-AI/Apriel-5B-Instruct_4437,William J. Fallon (attorney),https://en.wikipedia.org/wiki/William%20J.%20Fallon%20%28attorney%29,"William J. Fallon (January 23, 1886 – April 29, 1927) christened The Great Mouthpiece by the press was a prominent defense attorney during the 1920s who defended the gangster Arnold Rothstein and his accomplice Nicky Arnstein during the trial for the fixing of the 1919 World Series.",ServiceNow-AI/Apriel-5B-Instruct,When was William J. Fallon born?,"January 23, 1886","William J. Fallon was born on [HAL]February 10, 1942[/HAL]."
+psiloqa_togethercomputer/Pythia-Chat-Base-7B-v0.16_12236,A History of the Future (TV series),https://en.wikipedia.org/wiki/A%20History%20of%20the%20Future%20%28TV%20series%29,"A History of the Future is a 2019 documentary series by The History Channel, written and hosted by Professor Diego Rubio Rodríguez, and produced by Onza Entertainment. The series comprises four episodes, each of which explores one key aspect of society's future (work, democracy, globalization and climate) by analyzing past precedents and modern data, and projecting historical trends.
+The series has been the most ambitious production of History Channel Iberia to date, and it was commissioned to commemorate the 20th anniversary of the channel entitled “History of the Future.” To create it, the team examined hundreds of hours of archival footage and modern 4K images filmed across the five continents.
+The series features interviews with 18 leading academics, including Timothy Snyder (Yale), Erik Brynjolfsson (MIT), Naomi Oreskes (Harvard), Graham Allison (Harvard), Carl Benedikt Frey (Oxford),  Steven Levitsky (Harvard), Rana Mitter (Oxford), César Hidalgo (MIT), Tim Leuning (LSE), Myles Allen (Oxford), Manuel Muñiz (IE), and Joanna Haigh(Imperial College).
+The first episode premiered in Spanish and Portuguese on the History Channel on December 9, 2019, with great public success and media coverage. A preview was held on the 25th United Nations Climate Change conference. The English international version will be released in 2020.",togethercomputer/Pythia-Chat-Base-7B-v0.16,How many episodes does the series 'A History of the Future' comprise?,Four episodes,The series comprises a total of [HAL]52[/HAL] episodes.
+psiloqa_utter-project/EuroLLM-9B-Instruct_24074,Galileo Games,https://en.wikipedia.org/wiki/Galileo%20Games,"Galileo Games is a role-playing games publisher, best known for its games Bulldogs!, Mortal Coil, and How We Came To Live Here. It is the publishing imprint of Brennan Taylor, who is also the CEO of Indie Press Revolution.
+The company is co-owned by Brennan Taylor (designer) and Tim Rodriguez (publisher).",utter-project/EuroLLM-9B-Instruct,Who are the co-owners of Galileo Games?,Brennan Taylor and Tim Rodriguez,Galileo Games is [HAL]a company that develops online games. The co-owners of the company are the Finnish company Remnant Entertainment and the German company Daedalic Entertainment. Remnant Entertainment was established in 2006. Daedalic Entertainment was established in 2007[/HAL].
+psiloqa_togethercomputer/Pythia-Chat-Base-7B-v0.16_12735,Belene,https://en.wikipedia.org/wiki/Belene,"Belene (Bulgarian: Белене [ˈbɛlɛnɛ]) is a town in Pleven Province, Northern Bulgaria. It is the administrative centre of the homonymous Belene Municipality. The town is situated on the right bank of the Danube river, close to the town of Svishtov.",togethercomputer/Pythia-Chat-Base-7B-v0.16,"In which part of Bulgaria is Belene situated, and what is its geographical relation to Svishtov?",Belene is in Northern Bulgaria and is close to the town of Svishtov.,"Belene is situated in the [HAL]north-western[/HAL] part of Bulgaria, in the region of [HAL]Haskovo[/HAL]."
+psiloqa_HuggingFaceTB/SmolLM2-135M-Instruct_8673,List of functional urban areas in New Zealand,https://en.wikipedia.org/wiki/List%20of%20functional%20urban%20areas%20in%20New%20Zealand,"This is a list of functional urban areas in New Zealand, as defined by Statistics New Zealand.
+Under the Statistical standard for geographic areas 2023 and Statistical standard for geographic areas 2018, a functional urban area an urban area, rural settlement or rural statistical area where there is a major, large medium or small urban core with more than 5,000 residents. They may also have urban cores, satellite urban areas, rural settlements and rural hinterland ares where at least 40% of workers commute to the urban core or associated secondary urban core for work. Functional urban areas are based on linkages between where people live and where they work, shop, access health care, and take part in recreation activities.
+As of 2023, there are 53 functional urban areas in New Zealand.",HuggingFaceTB/SmolLM2-135M-Instruct,How many functional urban areas are there in New Zealand as of 2023?,"As of 2023, there are 53 functional urban areas in New Zealand. This count is based on the criteria and definitions provided by the relevant standards, ensuring that each designated area meets the necessary requirements set forth by the statistical guidelines.","As of 2023, New Zealand has [HAL]129[/HAL] urban areas."
+psiloqa_HuggingFaceTB/SmolLM2-360M-Instruct_10657,New Mexico State Road 519,https://en.wikipedia.org/wiki/New%20Mexico%20State%20Road%20519,"State Road 519 (NM 519) is a 15-mile-long (24 km) state highway in the US state of New Mexico. NM 519's southern terminus is at NM 111 south of La Madera, and the northern terminus is at the end of state maintenance and continues as County Route 222 in Las Tablas.",HuggingFaceTB/SmolLM2-360M-Instruct,How long is NM 519?,15 miles,NM 519 is approximately [HAL]10.5 kilometers[/HAL] long.
+psiloqa_HuggingFaceTB/SmolLM2-1.7B-Instruct_9565,John Rodriguez (baseball),https://en.wikipedia.org/wiki/John%20Rodriguez%20%28baseball%29,"John Joseph Rodriguez (born January 20, 1978) is a retired Major League Baseball Player. He played in the Major Leagues for the St. Louis Cardinals from 2005 to 2006.",HuggingFaceTB/SmolLM2-1.7B-Instruct,"During which years did John Joseph Rodriguez play in the Major Leagues, and how does this timeframe reflect the duration of his career with the team?","John Joseph Rodriguez played in the Major Leagues during the years 2005 and 2006. This two-year timeframe clearly indicates that his career in the Major Leagues was relatively brief, specifically spanning only those two seasons with the St. Louis Cardinals, which is a significant detail about the length and scope of his professional baseball career.","John Joseph Rodriguez played in the Major Leagues from [HAL]1979 to 1986[/HAL]. This timeframe reflects the duration of his career with the team, as he was a key player for the [HAL]New York Yankees during their successful run in the late 1970s and early 1980s[/HAL]."
+psiloqa_HuggingFaceH4/zephyr-7b-beta_11431,Nepenthes chang,https://en.wikipedia.org/wiki/Nepenthes%20chang,"Nepenthes chang is a tropical pitcher plant endemic to the Banthad Mountains of eastern Thailand, where it grows at elevations of 300–600 m above sea level. It is thought to be most closely related to N. kampotiana.
+The specific epithet chang refers to the Thai island of Ko Chang, where the type specimen was collected.",HuggingFaceH4/zephyr-7b-beta,Where is Nepenthes chang endemic to?,Banthad Mountains of eastern Thailand,"Nepenthes chang (also known as Nepenthes changhi) is a species of pitcher plant [HAL]endemic to the Philippines. Its natural habitat is in the provinces of Quezon, Rizal, and Laguna, on the island of Luzon[/HAL]. The species was first described by [HAL]Joseph Dalton Hooker in 1893[/HAL] and named after [HAL]the Chinese botanist Chang Yu-hsiang[/HAL], who collected the type specimen."
+psiloqa_TinyLlama/TinyLlama-1.1B-Chat-v1.0_1111,Funicular Rigiblick,https://en.wikipedia.org/wiki/Funicular%20Rigiblick,"The Funicular Rigiblick (German: Seilbahn Rigiblick) is a funicular railway in the north-east of the city of Zürich, Switzerland. It links a lower station served by Zürich tram routes 9 and 10 and Zürich trolleybus route 33, with an upper station at Rigiblick on the Zürichberg hill.
+The Rigiblick funicular is one of two funiculars within the city of Zürich, the other being the Polybahn funicular in the city centre. Additionally, the city's Dolderbahn rack railway was originally a funicular, until its conversion to rack working in the 1970s.",TinyLlama/TinyLlama-1.1B-Chat-v1.0,What type of railway is the Funicular Rigiblick?,Funicular railway,"The Funicular Rigiblick is a funicular railway in the city of [HAL]Cagliari, Sardinia, Italy[/HAL]. It is the [HAL]only funicular railway in the city[/HAL] and [HAL]was built in 1928[/HAL]. The railway is designed to transport passengers up and down the hill between the city [HAL]center and the surrounding areas[/HAL]. The Funicular Rigiblick is a popular mode of transportation for both [HAL]locals and tourists alike, as it offers a scenic and unique experience while saving time and energy compared to other means of transportation[/HAL]."
